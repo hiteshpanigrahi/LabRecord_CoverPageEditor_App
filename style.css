@@ -172,3 +172,120 @@ h4 {
     margin: 5px 0;
     color: black;
 }
+
+/* Responsiveness */
+
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .editor {
+        width: 90%;
+        max-width: 400px;
+        padding: 20px;
+    }
+
+    .template {
+        width: 95%;
+        max-width: 595px;
+        height: auto;
+        padding: 20px;
+    }
+
+    .info {
+        align-items: center;
+        gap: 10px;
+    }
+
+    .submitted-to,
+    .submitted-by {
+        width: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        height: auto;
+        padding: 20px;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 50px;
+        align-items: center;
+    }
+
+    .editor {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .template {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+    }
+
+    .template .border{
+        height: 30em;
+    }
+
+    .template img {
+        width: 100px;
+    }
+
+    .lab-name {
+        font-size: 1em;
+    }
+
+    .university {
+        font-size: 0.8em;
+    }
+
+    .location {
+        font-size: 0.8em;
+    }
+
+    .department {
+        font-size: 0.8em;
+    }
+
+    .info {
+        align-items: center;
+    }
+
+    .submitted-to,
+    .submitted-by {
+        border: 2px solid gray;
+        border-radius: 4px;
+        padding: 10px;
+        background-color: lightblue;
+        width: 50%;
+        height: 133px;
+        text-align: left;
+    }
+
+    .submitted-to h4,
+    .submitted-by h4 {
+        font-size: 0.8em;
+        font-weight: bold;
+        color: #d9534f;
+    }
+
+    .submitted-to h5,
+    .submitted-by h5 {
+        font-size: 0.6em;
+        margin: 5px 0;
+        color: black;
+    }
+
+    button {
+        display: inline-flex;
+        margin:  25px 6px;
+        width: 28%;
+        font-size: 0.9rem;
+    }
+}
