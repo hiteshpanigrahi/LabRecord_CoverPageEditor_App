@@ -206,7 +206,7 @@ h4 {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     body {
         height: auto;
         padding: 20px;
