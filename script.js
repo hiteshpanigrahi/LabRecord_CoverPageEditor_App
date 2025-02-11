@@ -17,22 +17,16 @@ function clearFields() {
 }
 
 function downloadTemplate() {
-    const { jsPDF } = window.jspdf;  // Load jsPDF
-    let doc = new jsPDF({
-        orientation: 'portrait',  // or 'landscape'
-        unit: 'mm',
-        format: 'a4'  // Standard page size
-    });
+    let template = document.getElementById("template");
 
-    let element = document.getElementById("template"); // Select the cover page
-
-    html2canvas(element, { scale: 2 }).then(canvas => {
-        let imgData = canvas.toDataURL("image/png"); // Convert to image
-        let imgWidth = 210; // A4 width in mm
-        let imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
-        
-        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight); // Add image to PDF
-        doc.save("Lab_Record_Cover.pdf"); // Download the file
+    html2canvas(template, {
+        scale: 3,  // Higher scale = better quality PNG
+        useCORS: true,  // Ensure images load properly
+        backgroundColor: null  // Keep transparent background
+    }).then(canvas => {
+        let link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");  // Convert to PNG format
+        link.download = "lab_cover.png";
+        link.click();
     });
 }
-
