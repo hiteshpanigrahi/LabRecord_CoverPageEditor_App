@@ -7,7 +7,8 @@
 
 /* General Styles */
 body {
-    background: #201f1c;
+    background: #242631;
+    background-size: cover;
     color: white;
     display: flex;
     justify-content: center;
@@ -27,7 +28,7 @@ body {
 .editor {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border: 3px solid gray;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 15px;
     padding: 30px;
     width: 380px;
@@ -53,7 +54,8 @@ input {
 
 /* Buttons */
 button {
-    background: #6C63FF;
+    background: #6b63ffbc;
+    backdrop-filter: blur(10px);
     border: none;
     color: white;
     padding: 10px;
@@ -167,7 +169,7 @@ h4 {
 
 .submitted-to h5,
 .submitted-by h5 {
-    font-size: 14px;
+    font-size: 12px;
     margin: 5px 0;
     color: black;
 }
