@@ -28,7 +28,7 @@ Welcome to the **OUTR Lab Record Cover Generator**! This web app is designed spe
 ## **How to Use** 🛠️
 
 ### **Step 1: Open the Web App**
-Visit the live web app: **[OUTR Lab Record Cover Generator](https://your-live-app-link.com)**
+Visit the live web app: **[OUTR Lab Record Cover Generator](https://hiteshpanigrahi.github.io/LabRecord_CoverPageEditor_App/)**
 
 ### **Step 2: Fill Out the Form**
 1. Enter your **School Name**.
