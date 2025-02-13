@@ -2,42 +2,60 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Nunito Sans';
 }
 
 /* General Styles */
 body {
-    background: #242631;
+    background: linear-gradient(45deg, #5249c8 30%, #bd48f8, #d9534f);
     background-size: cover;
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
-
+    font-family: 'Nunito Sans';
 }
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-bottom: 30px;
+}
+
+
+.navbar h2 {
+    font-size: 3em;
+    letter-spacing: 4px;
+    padding: 40px;
+    color: #fff;
+}
+
 
 /* Container */
 .container {
     display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 200px;
     padding: 20px;
 }
 
 /* Editor Panel */
 .editor {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    /* border: 1px solid white; */
     border-radius: 15px;
     padding: 30px;
     width: 380px;
-    box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.2);
+    height: 850px;
+    line-height: 25px;
+    box-shadow: 0px 0px 60px rgba(74, 57, 74, 0.684);
 }
 
 .editor h2 {
     margin: 0 0 30px 0;
     text-align: center;
+    letter-spacing: 2px;
     font-size: 1.7rem;
 }
 
@@ -52,30 +70,91 @@ input {
     color: white;
 }
 
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 /* Buttons */
 button {
-    background: #6b63ffbc;
-    backdrop-filter: blur(10px);
+    background: #b966f1;
     border: none;
-    color: white;
+    color: #fff;
     padding: 10px;
-    margin: 20px 10px;
+    margin: 40px 10px 0 10px;
     width: 80px;
     cursor: pointer;
     border-radius: 7px;
     transition: 0.3s;
+    font-weight: 600;
 }
 
 button:hover {
-    background: #5249c8;
+    background: #c689ee;
+    color: white;
 }
 
-/* Template Container */
+/* ------------------------Templates-Tabs----------------------- */
+
+.tabs {
+    display: flex;
+    height: 850px;
+    width: 700px;
+    position: relative;
+}
+
+.tabs input {
+    display: none;
+}
+
+.template-name {
+    color: white;
+    background: #9984d461;
+    border-radius: 5px 5px 0 0;
+    height: 50px;
+    padding: 10px 30px;
+    position: relative;
+    left: 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+input:checked+label .template-name {
+    background: #eaae72;
+    color: black;
+    font-weight: 700;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: 0.3s;
+}
+
+.tab-content {
+    position: absolute;
+    left: 25px;
+    top: 49px;
+    opacity: 0;
+    z-index: 0;
+    transition: 0.5s;
+
+}
+
+input:checked+label .tab-content {
+    opacity: 1;
+}
+
+/* -----------------Template-Container--------------------- */
+
 .template-container {
+    /* background-color: #ffd95c; */
+    background-image: linear-gradient(123deg, #eaae72 50%, #e080a4 90%);
+    width: 670px;
+    height: 820px;
+    border-radius: 0px 5px 5px 5px;
     flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0px 60px 70px rgba(74, 57, 74, 0.684);
+
 }
 
 /* Cover Page Template */
@@ -85,9 +164,9 @@ button:hover {
     padding: 30px;
     width: 600px;
     height: 750px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    font-family: 'Times New Roman';
     text-align: center;
 }
 
@@ -174,38 +253,123 @@ h4 {
     color: black;
 }
 
-/* -------------------Responsiveness--------------------- */
-
-@media (max-width: 620px) {
-    body {
-        height: auto;
-        padding: 20px;
+/* --------------template-2-------------------- */
+#template-2 {
+    .university {
+        color: #ac8471;
+        font-size: 1.8em;
+        font-weight: bold;
     }
 
-    .container {
-        flex-direction: column;
-        gap: 50px;
-        align-items: center;
+    .location {
+        color: #337ab7;
+        font-size: 1.2em;
+        font-weight: bold;
+        margin: 5px 0 5px 0;
     }
 
-    .editor {
-        width: 75%;
-        padding: 15px;
+    .department {
+        color: #5cb85c;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 10px;
     }
 
-    .template-container {
-        transform: scale(1);
-        transform-origin: top center;
+    .lab-name {
+        color: #337ab7;
+        font-size: 1.6em;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 10px 0;
     }
 
-    button {
-        display: inline-flex;
-        justify-content: center;
-        margin: 30px 5px 0px 11px;
-        width: 27%;
-        font-size: 0.8rem;
+    /* University Logo */
+    .template img {
+        width: 160px;
+        margin: 10px 0 0 0;
+    }
+
+    .submitted-to,
+    .submitted-by {
+        border: none;
+        padding: 10px;
+        background-color: transparent;
+        width: 45%;
+        text-align: left;
     }
 }
+
+/* --------------template-3-------------------- */
+#template-3 {
+    .university {
+        color: #ac8471;
+        font-size: 1.8em;
+        font-weight: bold;
+    }
+
+    .location {
+        color: #337ab7;
+        font-size: 1.2em;
+        font-weight: bold;
+        margin: 5px 0 5px 0;
+    }
+
+    .department {
+        color: #5cb85c;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .lab-name {
+        color: #337ab7;
+        font-size: 1.6em;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 10px 0;
+    }
+
+    /* University Logo */
+    .template img {
+        width: 160px;
+        margin: 10px 0 0 0;
+    }
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    top: 380px;
+    color: white;
+    text-align: right;
+    padding: 10px;
+    font-size: 0.9rem;
+    margin-top: -350px;
+    margin-right: 20px;
+}
+
+.footer h1 {
+    font-size: 3.6em;
+    letter-spacing: 5px;
+}
+
+.footer a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer i {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 2px;
+    margin-top: 10px;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+/* -------------------Responsiveness--------------------- */
 
 @media (max-width: 1280px) {
     body {
@@ -220,7 +384,7 @@ h4 {
     }
 
     .editor {
-        width: 75%;
+        width: 64%;
         padding: 15px;
     }
 
@@ -236,4 +400,99 @@ h4 {
         width: 27%;
         font-size: 0.8rem;
     }
+
+    .footer {
+        position: absolute;
+        right: 240px;
+        top: 2400px;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9rem;
+        margin-top: -350px;
+        margin-right: 20px;
+    }
+
+    .footer i {
+        display: inline-flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        position: relative;
+        right: 0;
+        padding: 20px 10px;
+        margin-top: 10px;
+        font-size: 30px;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 800px) {
+    body {
+        height: auto;
+        padding: 20px;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    .navbar h2 {
+        font-size: 3em;
+        font-weight: 800;
+        text-align: center;
+        padding: 40px;
+        color: #fff;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 80px;
+        align-items: center;
+    }
+
+    .editor {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .template-container {
+        transform: scale(1);
+        transform-origin: top center;
+    }
+
+    button {
+        display: inline-flex;
+        justify-content: center;
+        margin: 30px 5px 0px 11px;
+        width: 27%;
+        font-size: 0.8rem;
+    }
+
+    .footer {
+        position: absolute;
+        right: 240px;
+        top: 2400px;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9rem;
+        margin-top: -350px;
+        margin-right: 20px;
+    }
+
+    .footer i {
+        display: inline-flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        position: relative;
+        right: 0;
+        padding: 20px 10px;
+        margin-top: 10px;
+        font-size: 30px;
+        text-decoration: none;
+    }
+
 }
