@@ -47,7 +47,7 @@ nav {
     border-radius: 15px;
     padding: 30px;
     width: 380px;
-    height: 850px;
+    height: 900px;
     line-height: 25px;
     box-shadow: 0px 0px 60px rgba(74, 57, 74, 0.684);
 }
@@ -80,7 +80,7 @@ button {
     border: none;
     color: #fff;
     padding: 10px;
-    margin: 40px 10px 0 10px;
+    margin: 20px 10px 0 10px;
     width: 80px;
     cursor: pointer;
     border-radius: 7px;
@@ -290,13 +290,16 @@ h4 {
         margin: 10px 0 0 0;
     }
 
-    .submitted-to,
     .submitted-by {
         border: none;
-        padding: 10px;
+        padding: 10px 20px;
         background-color: transparent;
         width: 45%;
         text-align: left;
+    }
+
+    .submitted-by h4{
+        font-size: 20px;
     }
 }
 

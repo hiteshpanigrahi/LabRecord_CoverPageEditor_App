@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=710, initial-scale=1.0">
+    <meta name="viewport" content="width=710, initial-scale=0.8">
     <title>OUTR Lab CoverPage Editor</title>
     <link rel="shortcut icon" href="src/assets/images/outr_logo.png" type="image/x-icon">
     <link
@@ -44,6 +44,8 @@
             <input type="text" id="section" placeholder="Enter Section">
             <label for="group">Group:</label>
             <input type="text" id="group" placeholder="Enter Group">
+            <label for="sub-group">Sub-Group:</label>
+            <input type="text" id="sub-group" placeholder="Enter Sub-Group">
             <label for="semester">Semester:</label>
             <input type="text" id="semester" placeholder="Enter Semester">
             <button onclick="updateTemplate()">Update</button>
@@ -59,26 +61,26 @@
                         <div class="template-container">
                             <div class="template" id="template-1">
                                 <div class="border">
-                                    <h2 class="lab-name"><span>[ NOT SET ]</span> <br>LAB RECORD</h2>
+                                    <h2 class="lab-name"><span class="lab-name-text">[ NOT SET ]</span> <br>LAB RECORD</h2>
                                     <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo">
-                                    <h3 class="university">ODISHA UNIVERSITY
-                                        OF <br>TECHNOLOGY AND RESEARCH</h3>
+                                    <h3 class="university">ODISHA UNIVERSITY OF <br>TECHNOLOGY AND RESEARCH</h3>
                                     <h3 class="location">BHUBANESWAR</h3>
-                                    <h3 class="department">SCHOOL OF <span id="department-text">[NOT SET]</span></h3>
+                                    <h3 class="department">SCHOOL OF <span class="department-text">[NOT SET]</span></h3>
                                     <div class="info">
                                         <div class="submitted-to">
                                             <h4>SUBMITTED TO: -</h4>
-                                            <h5 id="teacher1-text">[NOT SET]</h5>
-                                            <h5 id="teacher2-text">[NOT SET]</h5>
+                                            <h5 class="teacher1-text">[NOT SET]</h5>
+                                            <h5 class="teacher2-text">[NOT SET]</h5>
                                         </div>
                                         <div class="submitted-by">
                                             <h4>SUBMITTED BY: -</h4>
-                                            <h5>NAME: <span id="name-text">[NOT SET]</span></h5>
-                                            <h5>REGD NO: <span id="regdno-text">[NOT SET]</span></h5>
-                                            <h5>DEPT: <span id="dept-text">[NOT SET]</span></h5>
-                                            <h5>SEM: <span id="sem-text">[NOT SET]</span></h5>
-                                            <h5>SEC: <span id="sec-text">[NOT SET]</span></h5>
-                                            <h5>GROUP: <span id="group-text">[NOT SET]</span></h5>
+                                            <h5>NAME: <span class="name-text">[NOT SET]</span></h5>
+                                            <h5>REGD NO: <span class="regdno-text">[NOT SET]</span></h5>
+                                            <h5>DEPT: <span class="dept-text">[NOT SET]</span></h5>
+                                            <h5>SEM: <span class="sem-text">[NOT SET]</span></h5>
+                                            <h5>SEC: <span class="sec-text">[NOT SET]</span></h5>
+                                            <h5>GROUP: <span class="group-text">[NOT SET]</span></h5>
+                                            <h5>SUB-GROUP: <span class="subgroup-text">[NOT SET]</span></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -98,23 +100,20 @@
                                     <h3 class="university">ODISHA UNIVERSITY
                                         OF <br>TECHNOLOGY AND RESEARCH</h3>
                                     <h3 class="location">BHUBANESWAR</h3>
-                                    <h3 class="department">SCHOOL OF <span id="department-text">[NOT SET]</span></h3>
+                                    <h3 class="department">SCHOOL OF <span class="department-text">[NOT SET]</span></h3>
                                     <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo">
-                                    <h2 class="lab-name"><span>[ NOT SET ]</span><br>LAB RECORD</h2>
+                                    <h2 class="lab-name"><span class="lab-name-text">[ NOT SET ]</span> <br>LAB RECORD</h2>
                                     <div class="info">
-                                        <div class="submitted-to">
-                                            <h4>SUBMITTED TO: -</h4>
-                                            <h5 id="teacher1-text">[NOT SET]</h5>
-                                            <h5 id="teacher2-text">[NOT SET]</h5>
-                                        </div>
+                                        
                                         <div class="submitted-by">
                                             <h4>SUBMITTED BY: -</h4>
-                                            <h5>NAME: <span id="name-text">[NOT SET]</span></h5>
-                                            <h5>REGD NO: <span id="regdno-text">[NOT SET]</span></h5>
-                                            <h5>DEPT: <span id="dept-text">[NOT SET]</span></h5>
-                                            <h5>SEM: <span id="sem-text">[NOT SET]</span></h5>
-                                            <h5>SEC: <span id="sec-text">[NOT SET]</span></h5>
-                                            <h5>GROUP: <span id="group-text">[NOT SET]</span></h5>
+                                            <h5>NAME: <span class="name-text">[NOT SET]</span></h5>
+                                            <h5>REGD NO: <span class="regdno-text">[NOT SET]</span></h5>
+                                            <h5>DEPT: <span class="dept-text">[NOT SET]</span></h5>
+                                            <h5>SEM: <span class="sem-text">[NOT SET]</span></h5>
+                                            <h5>SEC: <span class="sec-text">[NOT SET]</span></h5>
+                                            <h5>GROUP: <span class="group-text">[NOT SET]</span></h5>
+                                            <h5>SUB-GROUP: <span class="subgroup-text">[NOT SET]</span></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -134,23 +133,24 @@
                                     <h3 class="university">ODISHA UNIVERSITY
                                         OF <br>TECHNOLOGY AND RESEARCH</h3>
                                     <h3 class="location">BHUBANESWAR</h3>
-                                    <h3 class="department">SCHOOL OF <span id="department-text">[NOT SET]</span></h3>
+                                    <h3 class="department">SCHOOL OF <span class="department-text">[NOT SET]</span></h3>
                                     <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo">
                                     <h2 class="lab-name"><span>[ NOT SET ]</span><br>LAB RECORD</h2>
                                     <div class="info">
                                         <div class="submitted-to">
                                             <h4>SUBMITTED TO: -</h4>
-                                            <h5 id="teacher1-text">[NOT SET]</h5>
-                                            <h5 id="teacher2-text">[NOT SET]</h5>
+                                            <h5 class="teacher1-text">[NOT SET]</h5>
+                                            <h5 class="teacher2-text">[NOT SET]</h5>
                                         </div>
                                         <div class="submitted-by">
                                             <h4>SUBMITTED BY: -</h4>
-                                            <h5>NAME: <span id="name-text">[NOT SET]</span></h5>
-                                            <h5>REGD NO: <span id="regdno-text">[NOT SET]</span></h5>
-                                            <h5>DEPT: <span id="dept-text">[NOT SET]</span></h5>
-                                            <h5>SEM: <span id="sem-text">[NOT SET]</span></h5>
-                                            <!-- <h5>SEC: <span id="sec-text">[NOT SET]</span></h5> -->
-                                            <h5>GROUP: <span id="group-text">[NOT SET]</span></h5>
+                                            <h5>NAME: <span class="name-text">[NOT SET]</span></h5>
+                                            <h5>REGD NO: <span class="regdno-text">[NOT SET]</span></h5>
+                                            <h5>DEPT: <span class="dept-text">[NOT SET]</span></h5>
+                                            <h5>SEM: <span class="sem-text">[NOT SET]</span></h5>
+                                            <!-- <h5>SEC: <span class="sec-text">[NOT SET]</span></h5> -->
+                                            <h5>GROUP: <span class="group-text">[NOT SET]</span></h5>
+                                            <h5>SUB-GROUP: <span class="subgroup-text">[NOT SET]</span></h5>
                                         </div>
                                     </div>
                                 </div>
