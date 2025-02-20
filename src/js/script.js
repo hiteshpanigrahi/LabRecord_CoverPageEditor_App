@@ -87,7 +87,7 @@ function updateTemplate() {
 // Clear All Fields 
 
 function clearFields() {
-    if (confirm("Are you sure you want to clear all fields?")) {
+    if (confirm("Clear all fields?")) {
         document.querySelectorAll("input").forEach(input => input.value = "");
         updateTemplate();
     }
