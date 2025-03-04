@@ -292,14 +292,17 @@ h4 {
 
     .submitted-by {
         border: none;
-        padding: 10px 20px;
+        padding: 5px 20px;
         background-color: transparent;
-        width: 45%;
+        width: 75%;
         text-align: left;
     }
 
     .submitted-by h4{
-        font-size: 20px;
+        font-size: 27px;
+    }
+    .submitted-by h5{
+        font-size: 16px;
     }
 }
 
