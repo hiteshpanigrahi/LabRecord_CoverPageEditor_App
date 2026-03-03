@@ -1,5 +1,14 @@
+// -------------------------
+// UPDATE TEMPLATE FUNCTION
+// -------------------------
+
 function updateTemplate() {
-    // Retrieve input values with fallback to "[NOT SET]"
+
+    // Toggle references
+    const toggleGroup = document.getElementById('toggleGroup');
+    const toggleSubGroup = document.getElementById('toggleSubGroup');
+
+    // Retrieve input values
     const labValue = document.getElementById('lab').value || "[NOT SET]";
     const schoolValue = document.getElementById('school').value || "[NOT SET]";
     const teacher1Value = document.getElementById('teacher1').value || "[NOT SET]";
@@ -9,94 +18,109 @@ function updateTemplate() {
     const branchValue = document.getElementById('branch').value || "[NOT SET]";
     const semValue = document.getElementById('semester').value || "[NOT SET]";
     const secValue = document.getElementById('section').value || "[NOT SET]";
-    const groupValue = document.getElementById('group').value || "[NOT SET]";
-    const subgroupValue = document.getElementById('sub-group').value || "[NOT SET]";
 
-    // Select all templates (each with class .template)
+    // Conditional values for Group & Subgroup
+    const groupValue = toggleGroup.checked
+        ? (document.getElementById('group').value || "[NOT SET]")
+        : "";
+
+    const subgroupValue = toggleSubGroup.checked
+        ? (document.getElementById('sub-group').value || "[NOT SET]")
+        : "";
+
+    // Select all templates
     const templates = document.querySelectorAll('.template');
 
     templates.forEach(template => {
-        // Update lab name
-        const labNameEl = template.querySelector('.lab-name-text');
-        if (labNameEl) {
-            labNameEl.textContent = labValue;
-        }
 
-        // Update department (School)
-        const deptEl = template.querySelector('.department-text');
-        if (deptEl) {
-            deptEl.textContent = schoolValue;
-        }
+        const setText = (selector, value) => {
+            const el = template.querySelector(selector);
+            if (el) el.textContent = value;
+        };
 
-        // Update teacher1
-        const teacher1El = template.querySelector('.teacher1-text');
-        if (teacher1El) {
-            teacher1El.textContent = teacher1Value;
-        }
+        setText('.lab-name-text', labValue);
+        setText('.department-text', schoolValue);
+        setText('.teacher1-text', teacher1Value);
+        setText('.teacher2-text', teacher2Value);
+        setText('.name-text', nameValue);
+        setText('.regdno-text', regValue);
+        setText('.dept-text', branchValue);
+        setText('.sem-text', semValue);
+        setText('.sec-text', secValue);
 
-        // Update teacher2 (if exists)
-        const teacher2El = template.querySelector('.teacher2-text');
-        if (teacher2El) {
-            teacher2El.textContent = teacher2Value;
-        }
-
-        // Update name
-        const nameEl = template.querySelector('.name-text');
-        if (nameEl) {
-            nameEl.textContent = nameValue;
-        }
-
-        // Update registration number
-        const regEl = template.querySelector('.regdno-text');
-        if (regEl) {
-            regEl.textContent = regValue;
-        }
-
-        // Update branch
-        const branchEl = template.querySelector('.dept-text');
-        if (branchEl) {
-            branchEl.textContent = branchValue;
-        }
-
-        // Update semester
-        const semEl = template.querySelector('.sem-text');
-        if (semEl) {
-            semEl.textContent = semValue;
-        }
-
-        // Update section
-        const secEl = template.querySelector('.sec-text');
-        if (secEl) {
-            secEl.textContent = secValue;
-        }
-
-        // Update group
+        // Handle Group
         const groupEl = template.querySelector('.group-text');
         if (groupEl) {
-            groupEl.textContent = groupValue;
+            if (toggleGroup.checked) {
+                groupEl.textContent = groupValue;
+                groupEl.parentElement.style.display = "block";
+            } else {
+                groupEl.parentElement.style.display = "none";
+            }
         }
 
-        // Update sub-group
+        // Handle Subgroup
         const subgroupEl = template.querySelector('.subgroup-text');
         if (subgroupEl) {
-            subgroupEl.textContent = subgroupValue;
+            if (toggleSubGroup.checked) {
+                subgroupEl.textContent = subgroupValue;
+                subgroupEl.parentElement.style.display = "block";
+            } else {
+                subgroupEl.parentElement.style.display = "none";
+            }
         }
+
     });
 }
 
-// Clear All Fields 
+
+// -------------------------
+// AUTO UPDATE ON TOGGLE
+// -------------------------
+
+document.getElementById('toggleGroup').addEventListener('change', function () {
+    document.getElementById('group').disabled = !this.checked;
+    if (!this.checked) document.getElementById('group').value = "";
+    updateTemplate();
+});
+
+document.getElementById('toggleSubGroup').addEventListener('change', function () {
+    document.getElementById('sub-group').disabled = !this.checked;
+    if (!this.checked) document.getElementById('sub-group').value = "";
+    updateTemplate();
+});
+
+
+// -------------------------
+// CLEAR ALL FIELDS
+// -------------------------
 
 function clearFields() {
     if (confirm("Clear all fields?")) {
-        document.querySelectorAll("input").forEach(input => input.value = "");
+
+        document.querySelectorAll("input[type='text']").forEach(input => {
+            input.value = "";
+        });
+
+        // Reset toggles to checked
+        document.getElementById('toggleGroup').checked = true;
+        document.getElementById('toggleSubGroup').checked = true;
+
+        document.getElementById('group').disabled = false;
+        document.getElementById('sub-group').disabled = false;
+
         updateTemplate();
     }
 }
 
-// Download Template 
+
+// -------------------------
+// DOWNLOAD TEMPLATE
+// -------------------------
 
 function downloadTemplate() {
-    const selectedTemplate = document.querySelector('input[name="option"]:checked').parentElement.querySelector(".template");
+
+    const selectedTemplate = document.querySelector('input[name="option"]:checked')?.parentElement.querySelector(".template");
 
     if (!selectedTemplate) {
         alert("No template selected!");
@@ -104,14 +128,16 @@ function downloadTemplate() {
     }
 
     html2canvas(selectedTemplate, { scale: 2 }).then(canvas => {
+
         const imgData = canvas.toDataURL('image/png');
+
         const pdf = new jspdf.jsPDF({
             orientation: "portrait",
             unit: "mm",
             format: "a4"
         });
 
-        const imgWidth = 210; // A4 width in mm
+        const imgWidth = 210;
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
         pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);

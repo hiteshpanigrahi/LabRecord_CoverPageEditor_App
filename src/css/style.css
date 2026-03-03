@@ -9,7 +9,7 @@ body {
     background: linear-gradient(45deg, #5249c8 30%, #bd48f8, #d9534f);
     background-size: cover;
     color: white;
-    height: 100vh;
+    min-height: 100vh;
     font-family: 'Nunito Sans';
 }
 
@@ -72,6 +72,60 @@ input {
 
 input::placeholder {
     color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 27px;
+    height: 15px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 11px;
+    width: 11px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.switch input:checked+.slider {
+    background-color: #e080a4;
+}
+
+.switch input:checked+.slider:before {
+    transform: translateX(12px);
 }
 
 /* Buttons */
@@ -229,6 +283,7 @@ input:checked+label .tab-content {
     padding: 10px;
     background-color: lightblue;
     width: 45%;
+    height: 160px;
     text-align: left;
 }
 
@@ -298,10 +353,11 @@ h4 {
         text-align: left;
     }
 
-    .submitted-by h4{
+    .submitted-by h4 {
         font-size: 27px;
     }
-    .submitted-by h5{
+
+    .submitted-by h5 {
         font-size: 16px;
     }
 }
@@ -383,6 +439,15 @@ h4 {
         padding: 20px;
     }
 
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(45deg, #5249c8, #bd48f8, #d9534f);
+        z-index: -1;
+    }
+
+
     .container {
         flex-direction: column;
         gap: 50px;
@@ -405,30 +470,32 @@ h4 {
         margin: 30px 5px 0px 11px;
         width: 27%;
         font-size: 0.8rem;
+        background: #e080a4;
     }
 
     .footer {
-        position: absolute;
-        right: 240px;
-        top: 2400px;
-        color: white;
+        position: relative !important;
+        right: 0 !important;
+        top: 0 !important;
+        margin-top: 80px !important;
+        margin-right: 0 !important;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
-        padding: 10px;
-        font-size: 0.9rem;
-        margin-top: -350px;
-        margin-right: 20px;
+        padding: 50px 20px;
     }
 
-    .footer i {
-        display: inline-flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        position: relative;
-        right: 0;
-        padding: 20px 10px;
-        margin-top: 10px;
-        font-size: 30px;
-        text-decoration: none;
+    .footer-icons {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 25px;
+    }
+
+    .footer-icons a {
+        font-size: 26px;
     }
 }
 
@@ -478,27 +545,27 @@ h4 {
     }
 
     .footer {
-        position: absolute;
-        right: 240px;
-        top: 2400px;
-        color: white;
+        position: relative !important;
+        right: 0 !important;
+        top: 0 !important;
+        margin-top: 80px !important;
+        margin-right: 0 !important;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
-        padding: 10px;
-        font-size: 0.9rem;
-        margin-top: -350px;
-        margin-right: 20px;
+        padding: 50px 20px;
     }
 
-    .footer i {
-        display: inline-flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        position: relative;
-        right: 0;
-        padding: 20px 10px;
-        margin-top: 10px;
-        font-size: 30px;
-        text-decoration: none;
+    .footer-icons {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 25px;
     }
 
+    .footer-icons a {
+        font-size: 26px;
+    }
 }

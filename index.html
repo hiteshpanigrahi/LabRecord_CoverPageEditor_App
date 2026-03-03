@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=710, initial-scale=1.0">
+    <meta name="viewport" content="width=810, initial-scale=0.8">
     <title>OUTR Lab CoverPage Editor</title>
     <link rel="shortcut icon" href="src/assets/images/outr_logo.png" type="image/x-icon">
     <link
@@ -42,10 +42,27 @@
             <input type="text" id="branch" placeholder="Your Branch">
             <label for="section">Section:</label>
             <input type="text" id="section" placeholder="Enter Section">
-            <label for="group">Group:</label>
-            <input type="text" id="group" placeholder="Enter Group">
-            <label for="sub-group">Sub-Group:</label>
-            <input type="text" id="sub-group" placeholder="Enter Sub-Group">
+            <div class="form-group" id="groupField">
+                <div class="label-row">
+                    <label for="group">Group:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="toggleGroup" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <input type="text" id="group" placeholder="Enter Group">
+            </div>
+            <div class="form-group" id="subGroupField">
+                <div class="label-row">
+                    <label for="sub-group">Sub-Group:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="toggleSubGroup" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <input type="text" id="sub-group" placeholder="Enter Sub-Group">
+            </div>
+
             <label for="semester">Semester:</label>
             <input type="text" id="semester" placeholder="Enter Semester">
             <button onclick="updateTemplate()">Update</button>
@@ -61,7 +78,8 @@
                         <div class="template-container">
                             <div class="template" id="template-1">
                                 <div class="border">
-                                    <h2 class="lab-name"><span class="lab-name-text">[ NOT SET ]</span> <br>LAB RECORD</h2>
+                                    <h2 class="lab-name"><span class="lab-name-text">[ NOT SET ]</span> <br>LAB RECORD
+                                    </h2>
                                     <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo">
                                     <h3 class="university">ODISHA UNIVERSITY OF <br>TECHNOLOGY AND RESEARCH</h3>
                                     <h3 class="location">BHUBANESWAR</h3>
@@ -102,9 +120,10 @@
                                     <h3 class="location">BHUBANESWAR</h3>
                                     <h3 class="department">SCHOOL OF <span class="department-text">[NOT SET]</span></h3>
                                     <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo">
-                                    <h2 class="lab-name"><span class="lab-name-text">[ NOT SET ]</span> <br>LAB RECORD</h2>
+                                    <h2 class="lab-name"><span class="lab-name-text">[ NOT SET ]</span> <br>LAB RECORD
+                                    </h2>
                                     <div class="info">
-                                        
+
                                         <div class="submitted-by">
                                             <h4>SUBMITTED BY: -</h4>
                                             <h5>NAME: <span class="name-text">[NOT SET]</span></h5>
@@ -135,7 +154,8 @@
                                     <h3 class="location">BHUBANESWAR</h3>
                                     <h3 class="department">SCHOOL OF <span class="department-text">[NOT SET]</span></h3>
                                     <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo">
-                                    <h2 class="lab-name"><span class="lab-name-text">[ NOT SET ]</span> <br>LAB RECORD</h2>
+                                    <h2 class="lab-name"><span class="lab-name-text">[ NOT SET ]</span> <br>LAB RECORD
+                                    </h2>
                                     <div class="info">
                                         <div class="submitted-to">
                                             <h4>SUBMITTED TO: -</h4>
@@ -167,13 +187,22 @@
         <p>Designed & Crafted by</p>
         <h2>Hitesh Panigrahi</h2>
         <h3>E&I, OUTR</h3>
-        <a href="mailto:hitesh.edu@gmail.com" target="_blank"> <i class="fi fi-sr-envelope"></i></a>
-        <a href="https://github.com/hiteshpanigrahi" target="_blank"> <i class="fi fi-brands-github"></i></a>
-        <a href="https://www.linkedin.com/in/hitesh-panigrahi-2244312b7/" target="_blank"> <i
-                class="fi fi-brands-linkedin"></i>
-            </i></a>
 
+        <div class="footer-icons">
+            <a href="mailto:hitesh.edu@gmail.com" target="_blank">
+                <i class="fi fi-sr-envelope"></i>
+            </a>
+
+            <a href="https://github.com/hiteshpanigrahi" target="_blank">
+                <i class="fi fi-brands-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/hitesh-panigrahi-2244312b7/" target="_blank">
+                <i class="fi fi-brands-linkedin"></i>
+            </a>
+        </div>
     </div>
+
     <script src="src/js/script.js"></script>
 
 </body>
