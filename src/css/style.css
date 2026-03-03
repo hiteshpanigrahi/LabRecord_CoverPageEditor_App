@@ -74,8 +74,6 @@ input::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
 
-
-
 .label-row {
     display: flex;
     justify-content: space-between;
@@ -121,7 +119,7 @@ input::placeholder {
 }
 
 .switch input:checked+.slider {
-    background-color: #e080a4;
+    background-color: #eaae72;
 }
 
 .switch input:checked+.slider:before {
@@ -470,7 +468,7 @@ h4 {
         margin: 30px 5px 0px 11px;
         width: 27%;
         font-size: 0.8rem;
-        background: #e080a4;
+        background: #ed8db0;
     }
 
     .footer {
