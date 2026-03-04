@@ -4,6 +4,42 @@
     box-sizing: border-box;
 }
 
+.confirm-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.confirm-box {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    padding: 30px 40px;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.confirm-box p {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.confirm-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.confirm-buttons button {
+    width: 90px;
+}
+
 /* General Styles */
 body {
     background: linear-gradient(45deg, #5249c8 30%, #bd48f8, #d9534f);
@@ -41,22 +77,44 @@ nav {
 
 /* Editor Panel */
 .editor {
-    background: rgba(255, 255, 255, 0.06);
+    /* background: rgba(255, 255, 255, 0.06); */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
     backdrop-filter: blur(20px);
-    /* border: 1px solid white; */
     border-radius: 15px;
     padding: 30px;
-    width: 380px;
-    height: 900px;
+    width: 680px;
+    min-height: 900px;
     line-height: 25px;
-    box-shadow: 0px 0px 60px rgba(74, 57, 74, 0.684);
+    /* box-shadow: 0px 0px 60px rgba(74, 57, 74, 0.684); */
 }
 
 .editor h2 {
-    margin: 0 0 30px 0;
-    text-align: center;
-    letter-spacing: 2px;
-    font-size: 1.7rem;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 4px;
+}
+
+.formSection {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    padding: 22px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.formSection:first-child {
+    grid-column: span 2;
+}
+
+.formSection:hover {
+    transform: translateY(-2px);
+    transition: 0.4s ease;
 }
 
 /* Inputs */
@@ -68,11 +126,33 @@ input {
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.2);
     color: white;
+    outline: none;
+}
+
+input::selection {
+    background: rgba(185, 102, 241, 0.6);
+    color: white;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-family: 'Nunito Sans';
+}
+
+select option {
+    color: black;
 }
 
 input::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
+
 
 .label-row {
     display: flex;
@@ -131,18 +211,28 @@ button {
     background: #b966f1;
     border: none;
     color: #fff;
-    padding: 10px;
-    margin: 20px 10px 0 10px;
-    width: 80px;
+    padding: 4px 8px;
+    margin-top: 18px;
+    width: 200px;
+    /* remove fixed width */
     cursor: pointer;
-    border-radius: 7px;
-    transition: 0.3s;
+    border-radius: 20px;
+    /* capsule shape */
+    transition: 0.25s ease;
     font-weight: 600;
+    font-size: 1rem;
 }
 
 button:hover {
     background: #c689ee;
-    color: white;
+    box-shadow: 0 4px 12px rgba(185, 102, 241, 0.5);
+}
+
+.editor-buttons {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
 }
 
 /* ------------------------Templates-Tabs----------------------- */
@@ -233,13 +323,13 @@ input:checked+label .tab-content {
 /* University Logo */
 .template img {
     width: 160px;
-    margin: 10px 0 25px 0;
+    margin: 10px 0 0 0;
 }
 
 /* Titles */
 .lab-name {
     color: #337ab7;
-    font-size: 1.8em;
+    font-size: 1.6em;
     font-weight: bold;
     text-transform: uppercase;
     margin: 10px 0;
@@ -248,7 +338,7 @@ input:checked+label .tab-content {
 /* University & Department */
 .university {
     color: #ac8471;
-    font-size: 1.6em;
+    font-size: 1.8em;
     font-weight: bold;
 }
 
@@ -261,7 +351,7 @@ input:checked+label .tab-content {
 
 .department {
     color: #5cb85c;
-    font-size: 1.3em;
+    font-size: 1.5em;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 20px;
@@ -281,7 +371,7 @@ input:checked+label .tab-content {
     padding: 10px;
     background-color: lightblue;
     width: 45%;
-    height: 160px;
+    height: 170px;
     text-align: left;
 }
 
@@ -352,11 +442,11 @@ h4 {
     }
 
     .submitted-by h4 {
-        font-size: 27px;
+        font-size: 24px;
     }
 
     .submitted-by h5 {
-        font-size: 16px;
+        font-size: 14px;
     }
 }
 
@@ -395,6 +485,12 @@ h4 {
     .template img {
         width: 160px;
         margin: 10px 0 0 0;
+    }
+
+    .submitted-to,
+    .submitted-by {
+        background-color: rgba(173, 216, 230, 0);
+        border: none;
     }
 }
 
@@ -463,11 +559,9 @@ h4 {
     }
 
     button {
-        display: inline-flex;
-        justify-content: center;
-        margin: 30px 5px 0px 11px;
-        width: 27%;
-        font-size: 0.8rem;
+        width: 50%;
+        height: 60%;
+        font-size: 0.9rem;
         background: #ed8db0;
     }
 
@@ -477,7 +571,6 @@ h4 {
         top: 0 !important;
         margin-top: 80px !important;
         margin-right: 0 !important;
-
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -535,11 +628,10 @@ h4 {
     }
 
     button {
-        display: inline-flex;
-        justify-content: center;
-        margin: 30px 5px 0px 11px;
-        width: 27%;
-        font-size: 0.8rem;
+        width: 50%;
+        height: 60%;
+        font-size: 0.9rem;
+        background: #ed8db0;
     }
 
     .footer {
