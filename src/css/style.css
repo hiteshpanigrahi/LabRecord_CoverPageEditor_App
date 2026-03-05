@@ -59,11 +59,11 @@
 .rating-card {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(20px);
-    padding: 30px 35px;
+    padding: 30px 25px;
     border-radius: 18px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     text-align: center;
-    width: 320px;
+    width: 400px;
 }
 
 .rating-card h3 {
@@ -468,7 +468,7 @@ input:checked+label .tab-content {
     padding: 10px;
     background-color: lightblue;
     width: 45%;
-    height: 170px;
+    height: 175px;
     text-align: left;
 }
 
