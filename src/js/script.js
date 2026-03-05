@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // UPI support button
     document.getElementById("supportBtn").onclick = () => {
         window.location.href =
-            "upi://pay?pa=hitesh.edu9@okaxis&pn=Hitesh%20Panigrahi&am=10&cu=INR&tn=Lab%20CoverPage%20Support";
+            "upi://pay?pa=hitesh.edu9@okaxis&pn=Hitesh%20Panigrahi&cu=INR&tn=Lab%20CoverPage%20Support";
     };
 
     // Star rating
@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", loadRatingStats);
 // UPI Support function
 function supportUPI() {
     window.location.href =
-        "upi://pay?pa=hitesh.edu9@okaxis&pn=Hitesh%20Panigrahi&am=10&cu=INR&tn=Lab%20CoverPage%20Support";
+        "upi://pay?pa=hitesh.edu9@okaxis&pn=Hitesh%20Panigrahi&cu=INR&tn=Lab%20CoverPage%20Support";
 }
 
 // show popup
