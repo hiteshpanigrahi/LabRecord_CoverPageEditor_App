@@ -1,319 +1,369 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=810, initial-scale=0.8">
-    <title>OUTR Lab CoverPage Editor</title>
-    <link rel="shortcut icon" href="src/assets/images/outr_logo.png" type="image/x-icon">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Cookie&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css">
-    <link rel="stylesheet" href="src/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=810, initial-scale=0.8" />
+  <title>OUTR Lab CoverPage Editor</title>
+  <link rel="shortcut icon" href="src/assets/images/outr_logo.png" type="image/x-icon" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Cookie&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css" />
+  <link rel="stylesheet" href="src/css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
 <!----------------------------- Confirmation Modal ------------------------------->
 <div id="confirmModal" class="confirm-modal">
-    <div class="confirm-box">
-        <p>Clear all fields?</p>
+  <div class="confirm-box">
+    <p>Clear all fields?</p>
 
-        <div class="confirm-buttons">
-            <button id="confirmYes">Yes</button>
-            <button id="confirmNo">Cancel</button>
-        </div>
+    <div class="confirm-buttons">
+      <button id="confirmYes">Yes</button>
+      <button id="confirmNo">Cancel</button>
     </div>
+  </div>
 </div>
 
 <!----------------------------- Rating Modal ------------------------------->
 <div id="ratingModal" class="rating-modal">
+  <div class="rating-card">
+    <h3>⭐ Rate this tool</h3>
 
-    <div class="rating-card">
+    <p>If this tool helped you, please rate</p>
 
-        <h3>⭐ Rate this tool</h3>
-
-        <p>If this tool helped you, please rate</p>
-
-        <div class="stars">
-
-            <span data-rate="1">★</span>
-            <span data-rate="2">★</span>
-            <span data-rate="3">★</span>
-            <span data-rate="4">★</span>
-            <span data-rate="5">★</span>
-
-        </div>
-
-        <p class="support-msg">
-            This tool is free to use.
-            If it saved you time, consider supporting the project with a small donation.
-        </p>
-
-        <button id="supportBtn" class="support-btn" style="background: #ffd166;color: black;" onclick="supportUPI()">🍵 Buy me a Coffee</button>
-
-        <button id="closeRating">Maybe later</button>
-
+    <div class="stars">
+      <span data-rate="1">★</span>
+      <span data-rate="2">★</span>
+      <span data-rate="3">★</span>
+      <span data-rate="4">★</span>
+      <span data-rate="5">★</span>
     </div>
 
+    <p class="support-msg">
+      This tool is free to use. If it saved you time, consider supporting the
+      project with a small donation.
+    </p>
+
+    <button id="supportBtn" class="support-btn" style="background: #ffd166; color: black" onclick="openSupport()">
+      🍵 Buy me a Coffee
+    </button>
+
+    <button id="closeRating">Maybe later</button>
+  </div>
+</div>
+<!----------------------------- UPI Support Modal ------------------------------->
+<div id="supportModal" class="support-modal">
+  <div class="support-card">
+    <h3>☕ Support this project</h3>
+
+    <p>If this tool helped you, consider buying me a coffee.</p>
+
+    <img src="src\assets\images\GooglePay_QR.png" class="support-qr" />
+
+    <div class="upi-copy-btn" onclick="copyUPI()">
+      <span id="upiText">hitesh.edu9@okaxis</span>
+
+      <i class="fi fi-rr-copy"></i>
+
+      <div class="copy-tooltip" id="copyTooltip">Copied!</div>
+    </div>
+
+    <button class="close-support" onclick="closeSupport()">Close</button>
+  </div>
 </div>
 
 <!-- ----------------------------- Main Body ------------------------------ -->
 
 <body>
-    <nav>
-        <div class="navbar">
-            <h2>Lab CoverPage Editor</h2>
-            <div id="ratingBadge" class="rating-badge">
-                ⭐ Loading rating...
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="editor">
-            <div class="formSection">
-                <h2>Personal Details</h2>
-                <label for="name">Full Name:</label>
-                <input type="text" id="name" placeholder="Your Name">
-                <label for="reg">Reg No.:</label>
-                <input type="text" id="reg" placeholder="Your Registration Number">
-            </div>
-            <div class="formSection">
-                <h2>Academic Details</h2>
-                <label for="school">School of:</label>
-                <input list="schoolList" type="text" id="school" placeholder="Enter School">
-                <datalist id="schoolList">
-                    <option value="Electronics  Sciences">
-                    <option value="Electrical Sciences">
-                    <option value="Mechanical Sciences">
-                    <option value="Computer Sciences">
-                    <option value="Infrastructure and Planning">
-                    <option value="Biotechnology Engineering">
-                    <option value="Textile Engineering">
-                </datalist>
-
-                <label for="branch">Branch</label>
-                <input list="branchList" id="branch" placeholder="Select or type Branch">
-                <datalist id="branchList">
-                    <option value="E&I">
-                    <option value="ECE">
-                    <option value="EE">
-                    <option value="ME">
-                    <option value="CE">
-                    <option value="CSE">
-                    <option value="IT">
-                    <option value="AIML&R">
-                    <option value="BT">
-                    <option value="TE">
-                </datalist>
-
-                <div class="form-group" id="secField">
-                    <div class="label-row">
-                        <label for="section">Section:</label>
-                        <label class="switch">
-                            <input type="checkbox" id="toggleSec" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <input list="sectionList" type="text" id="section" placeholder="Enter Section">
-                    <datalist id="sectionList">
-                        <option value="A">
-                        <option value="B">
-                        <option value="C">
-                    </datalist>
-                </div>
-
-                <label for="semester">Semester:</label>
-                <input list="semList" type="text" id="semester" placeholder="Enter Semester">
-                <datalist id="semList">
-                    <option value="1st">
-                    <option value="2nd">
-                    <option value="3rd">
-                    <option value="4th">
-                    <option value="5th">
-                    <option value="6th">
-                    <option value="7th">
-                    <option value="8th">
-                </datalist>
-            </div>
-
-            <div class="formSection">
-                <h2>Lab Details</h2>
-                <label for="lab">Lab Name:</label>
-                <input type="text" id="lab" placeholder="Enter Lab Name">
-                <label for="teacher1">Teacher 1:</label>
-                <input type="text" id="teacher1" placeholder="Enter Teacher Name">
-                <label for="teacher2">Teacher 2:</label>
-                <input type="text" id="teacher2" placeholder="Enter Teacher Name">
-                <div class="form-group" id="groupField">
-                    <div class="label-row">
-                        <label for="group">Group:</label>
-                        <label class="switch">
-                            <input type="checkbox" id="toggleGroup" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <input type="text" id="group" placeholder="Enter Group">
-                </div>
-                <div class="form-group" id="subGroupField">
-                    <div class="label-row">
-                        <label for="sub-group">Sub-Group:</label>
-                        <label class="switch">
-                            <input type="checkbox" id="toggleSubGroup" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <input type="text" id="sub-group" placeholder="Enter Sub-Group">
-                </div>
-            </div>
-
-            <div class="editor-buttons">
-                <button onclick="clearFields()">Clear All</button>
-                <button onclick="downloadTemplate()">Download</button>
-                <button class="support-btn" onclick="supportUPI()">🍵 Buy me a Coffee</button>
-            </div>
-        </div>
-        <!--------------------------- TABS ------------------------------->
-        <div class="tabs">
-            <div class="tab-container">
-                <input type="radio" name="option" id="tab-1" checked>
-                <label for="tab-1">
-                    <!---------- Template-1 ------------->
-                    <div class="template-name">Template-1</div>
-                    <div class="tab-content">
-                        <div class="template-container">
-                            <div class="template" id="template-1">
-                                <div class="border">
-                                    <h3 class="university">ODISHA UNIVERSITY
-                                        OF <br>TECHNOLOGY AND RESEARCH</h3>
-                                    <h3 class="location">BHUBANESWAR</h3>
-                                    <h3 class="department"> <span class="department-text">[NOT SET]</span></h3>
-                                    <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo">
-                                    <h2 class="lab-name"><span class="lab-name-text">[ NOT SET ]</span> <br>LAB RECORD
-                                    </h2>
-                                    <div class="info">
-                                        <div class="submitted-to">
-                                            <h4>SUBMITTED TO: -</h4>
-                                            <h5 class="teacher1-text">[NOT SET]</h5>
-                                            <h5 class="teacher2-text">[NOT SET]</h5>
-                                        </div>
-                                        <div class="submitted-by">
-                                            <h4>SUBMITTED BY: -</h4>
-                                            <h5>NAME: <span class="name-text">[NOT SET]</span></h5>
-                                            <h5>REGD NO: <span class="regdno-text">[NOT SET]</span></h5>
-                                            <h5>DEPT: <span class="dept-text">[NOT SET]</span></h5>
-                                            <h5>SEM: <span class="sem-text">[NOT SET]</span></h5>
-                                            <h5>SEC: <span class="sec-text">[NOT SET]</span></h5>
-                                            <h5>GROUP: <span class="group-text">[NOT SET]</span></h5>
-                                            <h5>SUB-GROUP: <span class="subgroup-text">[NOT SET]</span></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </label>
-            </div>
-            <div class="tab-container">
-                <input type="radio" name="option" id="tab-2">
-                <label for="tab-2">
-                    <!---------- Template-2 ------------->
-                    <div class="template-name">Template-2</div>
-                    <div class="tab-content">
-                        <div class="template-container">
-                            <div class="template" id="template-2">
-                                <div class="border">
-                                    <h3 class="university">ODISHA UNIVERSITY
-                                        OF <br>TECHNOLOGY AND RESEARCH</h3>
-                                    <h3 class="location">BHUBANESWAR</h3>
-                                    <h3 class="department"> <span class="department-text">[NOT SET]</span></h3>
-                                    <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo">
-                                    <h2 class="lab-name"><span class="lab-name-text">[ NOT SET ]</span> <br>LAB RECORD
-                                    </h2>
-                                    <div class="info">
-                                        <div class="submitted-by">
-                                            <h4>SUBMITTED BY: -</h4>
-                                            <h5>NAME: <span class="name-text">[NOT SET]</span></h5>
-                                            <h5>REGD NO: <span class="regdno-text">[NOT SET]</span></h5>
-                                            <h5>DEPT: <span class="dept-text">[NOT SET]</span></h5>
-                                            <h5>SEM: <span class="sem-text">[NOT SET]</span></h5>
-                                            <h5>SEC: <span class="sec-text">[NOT SET]</span></h5>
-                                            <h5>GROUP: <span class="group-text">[NOT SET]</span></h5>
-                                            <h5>SUB-GROUP: <span class="subgroup-text">[NOT SET]</span></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </label>
-            </div>
-            <div class="tab-container">
-                <input type="radio" name="option" id="tab-3">
-                <label for="tab-3">
-                    <!---------- Template-3 ------------->
-                    <div class="template-name">Template-3</div>
-                    <div class="tab-content">
-                        <div class="template-container">
-                            <div class="template" id="template-3">
-                                <div class="border">
-                                    <h3 class="university">ODISHA UNIVERSITY
-                                        OF <br>TECHNOLOGY AND RESEARCH</h3>
-                                    <h3 class="location">BHUBANESWAR</h3>
-                                    <h3 class="department"> <span class="department-text">[NOT SET]</span></h3>
-                                    <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo">
-                                    <h2 class="lab-name"><span class="lab-name-text">[ NOT SET ]</span> <br>LAB RECORD
-                                    </h2>
-                                    <div class="info">
-                                        <div class="submitted-to">
-                                            <h4>SUBMITTED TO: -</h4>
-                                            <h5 class="teacher1-text">[NOT SET]</h5>
-                                            <h5 class="teacher2-text">[NOT SET]</h5>
-                                        </div>
-                                        <div class="submitted-by">
-                                            <h4>SUBMITTED BY: -</h4>
-                                            <h5>NAME: <span class="name-text">[NOT SET]</span></h5>
-                                            <h5>REGD NO: <span class="regdno-text">[NOT SET]</span></h5>
-                                            <h5>DEPT: <span class="dept-text">[NOT SET]</span></h5>
-                                            <h5>SEM: <span class="sem-text">[NOT SET]</span></h5>
-                                            <h5>SEC: <span class="sec-text">[NOT SET]</span></h5>
-                                            <h5>GROUP: <span class="group-text">[NOT SET]</span></h5>
-                                            <h5>SUB-GROUP: <span class="subgroup-text">[NOT SET]</span></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </label>
-            </div>
-        </div>
+  <nav>
+    <div class="navbar">
+      <h2>Lab CoverPage Editor</h2>
+      <div id="ratingBadge" class="rating-badge">⭐ Loading rating...</div>
     </div>
+  </nav>
 
-    <div class="footer">
-        <h1>About</h1>
-        <p>Designed & Crafted by</p>
-        <h2>Hitesh Panigrahi</h2>
-        <h3>E&I, OUTR</h3>
+  <div class="container">
+    <div class="editor">
+      <div class="formSection">
+        <h2>Personal Details</h2>
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" placeholder="Your Name" />
+        <label for="reg">Reg No.:</label>
+        <input type="text" id="reg" placeholder="Your Registration Number" />
+      </div>
+      <div class="formSection">
+        <h2>Academic Details</h2>
+        <label for="school">School of:</label>
+        <input list="schoolList" type="text" id="school" placeholder="Enter School" />
+        <datalist id="schoolList">
+          <option value="Electronics  Sciences"></option>
+          <option value="Electrical Sciences"></option>
+          <option value="Mechanical Sciences"></option>
+          <option value="Computer Sciences"></option>
+          <option value="Infrastructure and Planning"></option>
+          <option value="Biotechnology Engineering"></option>
+          <option value="Textile Engineering"></option>
+        </datalist>
 
-        <div class="footer-icons">
-            <a href="mailto:hitesh.edu@gmail.com" target="_blank">
-                <i class="fi fi-sr-envelope"></i>
-            </a>
-            <a href="https://github.com/hiteshpanigrahi" target="_blank">
-                <i class="fi fi-brands-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/hitesh-panigrahi-2244312b7/" target="_blank">
-                <i class="fi fi-brands-linkedin"></i>
-            </a>
+        <label for="branch">Branch</label>
+        <input list="branchList" id="branch" placeholder="Select or type Branch" />
+        <datalist id="branchList">
+          <option value="E&I"></option>
+          <option value="ECE"></option>
+          <option value="EE"></option>
+          <option value="ME"></option>
+          <option value="CE"></option>
+          <option value="CSE"></option>
+          <option value="IT"></option>
+          <option value="AIML&R"></option>
+          <option value="BT"></option>
+          <option value="TE"></option>
+        </datalist>
+
+        <div class="form-group" id="secField">
+          <div class="label-row">
+            <label for="section">Section:</label>
+            <label class="switch">
+              <input type="checkbox" id="toggleSec" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <input list="sectionList" type="text" id="section" placeholder="Enter Section" />
+          <datalist id="sectionList">
+            <option value="A"></option>
+            <option value="B"></option>
+            <option value="C"></option>
+          </datalist>
         </div>
+
+        <label for="semester">Semester:</label>
+        <input list="semList" type="text" id="semester" placeholder="Enter Semester" />
+        <datalist id="semList">
+          <option value="1st"></option>
+          <option value="2nd"></option>
+          <option value="3rd"></option>
+          <option value="4th"></option>
+          <option value="5th"></option>
+          <option value="6th"></option>
+          <option value="7th"></option>
+          <option value="8th"></option>
+        </datalist>
+      </div>
+
+      <div class="formSection">
+        <h2>Lab Details</h2>
+        <label for="lab">Lab Name:</label>
+        <input type="text" id="lab" placeholder="Enter Lab Name" />
+        <label for="teacher1">Teacher 1:</label>
+        <input type="text" id="teacher1" placeholder="Enter Teacher Name" />
+        <label for="teacher2">Teacher 2:</label>
+        <input type="text" id="teacher2" placeholder="Enter Teacher Name" />
+        <div class="form-group" id="groupField">
+          <div class="label-row">
+            <label for="group">Group:</label>
+            <label class="switch">
+              <input type="checkbox" id="toggleGroup" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <input type="text" id="group" placeholder="Enter Group" />
+        </div>
+        <div class="form-group" id="subGroupField">
+          <div class="label-row">
+            <label for="sub-group">Sub-Group:</label>
+            <label class="switch">
+              <input type="checkbox" id="toggleSubGroup" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <input type="text" id="sub-group" placeholder="Enter Sub-Group" />
+        </div>
+      </div>
+
+      <div class="editor-buttons">
+        <button onclick="clearFields()">Clear All</button>
+        <button onclick="downloadTemplate()">Download</button>
+        <button class="support-btn" onclick="openSupport()">
+          🍵 Buy me a Coffee
+        </button>
+      </div>
     </div>
+    <!--------------------------- TABS ------------------------------->
+    <div class="tabs">
+      <div class="tab-container">
+        <input type="radio" name="option" id="tab-1" checked />
+        <label for="tab-1">
+          <!---------- Template-1 ------------->
+          <div class="template-name">Template-1</div>
+          <div class="tab-content">
+            <div class="template-container">
+              <div class="template" id="template-1">
+                <div class="border">
+                  <h3 class="university">
+                    ODISHA UNIVERSITY OF <br />TECHNOLOGY AND RESEARCH
+                  </h3>
+                  <h3 class="location">BHUBANESWAR</h3>
+                  <h3 class="department">
+                    <span class="department-text">[NOT SET]</span>
+                  </h3>
+                  <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo" />
+                  <h2 class="lab-name">
+                    <span class="lab-name-text">[ NOT SET ]</span> <br />LAB
+                    RECORD
+                  </h2>
+                  <div class="info">
+                    <div class="submitted-to">
+                      <h4>SUBMITTED TO: -</h4>
+                      <h5 class="teacher1-text">[NOT SET]</h5>
+                      <h5 class="teacher2-text">[NOT SET]</h5>
+                    </div>
+                    <div class="submitted-by">
+                      <h4>SUBMITTED BY: -</h4>
+                      <h5>NAME: <span class="name-text">[NOT SET]</span></h5>
+                      <h5>
+                        REGD NO: <span class="regdno-text">[NOT SET]</span>
+                      </h5>
+                      <h5>DEPT: <span class="dept-text">[NOT SET]</span></h5>
+                      <h5>SEM: <span class="sem-text">[NOT SET]</span></h5>
+                      <h5>SEC: <span class="sec-text">[NOT SET]</span></h5>
+                      <h5>
+                        GROUP: <span class="group-text">[NOT SET]</span>
+                      </h5>
+                      <h5>
+                        SUB-GROUP:
+                        <span class="subgroup-text">[NOT SET]</span>
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="tab-container">
+        <input type="radio" name="option" id="tab-2" />
+        <label for="tab-2">
+          <!---------- Template-2 ------------->
+          <div class="template-name">Template-2</div>
+          <div class="tab-content">
+            <div class="template-container">
+              <div class="template" id="template-2">
+                <div class="border">
+                  <h3 class="university">
+                    ODISHA UNIVERSITY OF <br />TECHNOLOGY AND RESEARCH
+                  </h3>
+                  <h3 class="location">BHUBANESWAR</h3>
+                  <h3 class="department">
+                    <span class="department-text">[NOT SET]</span>
+                  </h3>
+                  <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo" />
+                  <h2 class="lab-name">
+                    <span class="lab-name-text">[ NOT SET ]</span> <br />LAB
+                    RECORD
+                  </h2>
+                  <div class="info">
+                    <div class="submitted-by">
+                      <h4>SUBMITTED BY: -</h4>
+                      <h5>NAME: <span class="name-text">[NOT SET]</span></h5>
+                      <h5>
+                        REGD NO: <span class="regdno-text">[NOT SET]</span>
+                      </h5>
+                      <h5>DEPT: <span class="dept-text">[NOT SET]</span></h5>
+                      <h5>SEM: <span class="sem-text">[NOT SET]</span></h5>
+                      <h5>SEC: <span class="sec-text">[NOT SET]</span></h5>
+                      <h5>
+                        GROUP: <span class="group-text">[NOT SET]</span>
+                      </h5>
+                      <h5>
+                        SUB-GROUP:
+                        <span class="subgroup-text">[NOT SET]</span>
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="tab-container">
+        <input type="radio" name="option" id="tab-3" />
+        <label for="tab-3">
+          <!---------- Template-3 ------------->
+          <div class="template-name">Template-3</div>
+          <div class="tab-content">
+            <div class="template-container">
+              <div class="template" id="template-3">
+                <div class="border">
+                  <h3 class="university">
+                    ODISHA UNIVERSITY OF <br />TECHNOLOGY AND RESEARCH
+                  </h3>
+                  <h3 class="location">BHUBANESWAR</h3>
+                  <h3 class="department">
+                    <span class="department-text">[NOT SET]</span>
+                  </h3>
+                  <img src="src/assets/images/outr_logo.png" alt="University Logo" class="logo" />
+                  <h2 class="lab-name">
+                    <span class="lab-name-text">[ NOT SET ]</span> <br />LAB
+                    RECORD
+                  </h2>
+                  <div class="info">
+                    <div class="submitted-to">
+                      <h4>SUBMITTED TO: -</h4>
+                      <h5 class="teacher1-text">[NOT SET]</h5>
+                      <h5 class="teacher2-text">[NOT SET]</h5>
+                    </div>
+                    <div class="submitted-by">
+                      <h4>SUBMITTED BY: -</h4>
+                      <h5>NAME: <span class="name-text">[NOT SET]</span></h5>
+                      <h5>
+                        REGD NO: <span class="regdno-text">[NOT SET]</span>
+                      </h5>
+                      <h5>DEPT: <span class="dept-text">[NOT SET]</span></h5>
+                      <h5>SEM: <span class="sem-text">[NOT SET]</span></h5>
+                      <h5>SEC: <span class="sec-text">[NOT SET]</span></h5>
+                      <h5>
+                        GROUP: <span class="group-text">[NOT SET]</span>
+                      </h5>
+                      <h5>
+                        SUB-GROUP:
+                        <span class="subgroup-text">[NOT SET]</span>
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
 
-    <script src="src/js/script.js"></script>
+  <div class="footer">
+    <h1>About</h1>
+    <p>Designed & Crafted by</p>
+    <h2>Hitesh Panigrahi</h2>
+    <h3>E&I, OUTR</h3>
 
+    <div class="footer-icons">
+      <a href="mailto:hitesh.edu@gmail.com" target="_blank">
+        <i class="fi fi-sr-envelope"></i>
+      </a>
+      <a href="https://github.com/hiteshpanigrahi" target="_blank">
+        <i class="fi fi-brands-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/hitesh-panigrahi-2244312b7/" target="_blank">
+        <i class="fi fi-brands-linkedin"></i>
+      </a>
+    </div>
+  </div>
+
+  <script src="src/js/script.js"></script>
 </body>
 
 </html>
