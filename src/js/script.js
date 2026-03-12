@@ -226,12 +226,9 @@ function loadFormData() {
   const savedData = localStorage.getItem("labFormData");
 
   if (!savedData) return;
-
   const formData = JSON.parse(savedData);
-
   Object.keys(formData).forEach((id) => {
     const field = document.getElementById(id);
-
     if (field) {
       field.value = formData[id];
     }
@@ -339,39 +336,28 @@ function loadRatingStats() {
       document.getElementById("ratingBadge").style.display = "none";
     });
 }
-
 document.addEventListener("DOMContentLoaded", loadRatingStats);
 
 // UPI Support function
 function openSupport() {
-
   document.getElementById("supportModal").style.display = "flex";
-
 }
 
 function closeSupport() {
-
   document.getElementById("supportModal").style.display = "none";
-
 }
 
 function copyUPI() {
-
   const upi = "hitesh.edu9@okaxis";
-
+  
   navigator.clipboard.writeText(upi);
-
   const tooltip = document.getElementById("copyTooltip");
-
   tooltip.classList.add("show");
-
   setTimeout(() => {
     tooltip.classList.remove("show");
   }, 2500);
 
 }
-
-
 
 // show popup
 function showRatingPopup() {
