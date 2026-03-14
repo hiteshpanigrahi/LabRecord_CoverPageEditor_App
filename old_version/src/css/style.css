@@ -1,0 +1,850 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ------------------------- Confirmation Modal ------------------------- */
+.confirm-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.confirm-box {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.confirm-box p {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.confirm-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.confirm-buttons button {
+  width: 90px;
+}
+
+/* ------------------------- Rating Modal ------------------------- */
+.rating-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+.rating-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  padding: 30px 25px;
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 400px;
+}
+
+.rating-card h3 {
+  margin-bottom: 10px;
+}
+
+.stars {
+  font-size: 3rem;
+  margin: 15px 0;
+}
+
+.stars span {
+  cursor: pointer;
+  padding: 5px;
+  transition: 0.2s;
+}
+
+.stars span:hover {
+  transform: scale(1.2);
+  color: #ffd966;
+}
+
+.support-msg {
+  font-size: 0.9rem;
+  margin: 15px 0;
+  opacity: 0.9;
+}
+
+#supportBtn {
+  margin-top: 5px;
+  background: #6f5cff;
+  border: none;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+#closeRating {
+  margin-top: 20px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  opacity: 0.7;
+  box-shadow: none;
+}
+
+/* ---------------------- UPI Support Modal ------------------------------ */
+.support-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.support-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  width: 320px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+.support-card h3 {
+  margin-bottom: 10px;
+}
+
+.support-qr {
+  width: 180px;
+  margin: 15px 0;
+  border-radius: 10px;
+}
+
+.upi-copy-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+  width: fit-content;
+  margin: auto;
+}
+
+.upi-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.upi-copy-btn i {
+  font-size: 16px;
+  margin-top: 5px;
+  opacity: 0.8;
+}
+
+.copy-tooltip {
+  position: absolute;
+  top: -40px;
+  background: rgba(36, 36, 36, 0.8);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.2s ease;
+  pointer-events: none;
+}
+
+.copy-tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.close-support {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.close-support:hover {
+  background-color: rgba(255, 0, 0, 0);
+  box-shadow: none;
+}
+
+/* -------------------------------General Body Styles--------------------------------------------- */
+body {
+  background: linear-gradient(45deg, #5249c8 30%, #bd48f8, #d9534f);
+  background-size: cover;
+  color: white;
+  min-height: 100vh;
+  font-family: "Nunito Sans";
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-bottom: 30px;
+}
+
+.navbar h2 {
+  font-size: 3em;
+  letter-spacing: 4px;
+  padding: 40px;
+  padding-bottom: 10px;
+  color: #fff;
+}
+
+/* Rating Badge */
+.rating-badge {
+  display: none;
+  align-items: center;
+  font-size: 0.9rem;
+  margin-left: 50px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  font-family:
+    Cascadia Code,
+    monospace;
+}
+
+/* Container */
+.container {
+  display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 200px;
+  padding: 20px;
+}
+
+/* Editor Panel */
+.editor {
+  /* background: rgba(255, 255, 255, 0.06); */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  backdrop-filter: blur(20px);
+  border-radius: 15px;
+  padding: 30px;
+  width: 680px;
+  min-height: 900px;
+  line-height: 25px;
+  /* box-shadow: 0px 0px 60px rgba(74, 57, 74, 0.684); */
+}
+
+.editor h2 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 4px;
+}
+
+.formSection {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  padding: 22px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.formSection:first-child {
+  grid-column: span 2;
+}
+
+.formSection:hover {
+  transform: translateY(-2px);
+  transition: 0.4s ease;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  outline: none;
+}
+
+input::selection {
+  background: rgba(185, 102, 241, 0.6);
+  color: white;
+}
+
+input::placeholder {
+  font-family: "Cascadia Code", monospace;
+  font-size: 12px;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-family: "Nunito Sans";
+}
+
+select option {
+  color: black;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 27px;
+  height: 15px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 11px;
+  width: 11px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.switch input:checked+.slider {
+  background-color: #eaae72;
+}
+
+.switch input:checked+.slider:before {
+  transform: translateX(12px);
+}
+
+/* Buttons */
+button {
+  background: #b966f1;
+  border: none;
+  color: #fff;
+  padding: 4px 8px;
+  margin-top: 18px;
+  width: 200px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.25s ease;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+button:hover {
+  background: #ffd16b;
+  box-shadow: 0 4px 12px rgba(255, 209, 102, 0.5);
+}
+
+.editor-buttons {
+  grid-column: span 2;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.support-btn {
+  background: #ffd166;
+  color: rgb(49, 49, 49);
+  font-size: 1.3rem;
+  padding-left: 2px;
+  font-family: cookie;
+}
+
+/* ------------------------Templates-Tabs----------------------- */
+
+.tabs {
+  display: flex;
+  height: 850px;
+  width: 700px;
+  position: relative;
+}
+
+.tabs input {
+  display: none;
+}
+
+.template-name {
+  color: white;
+  background: #9984d461;
+  border-radius: 5px 5px 0 0;
+  height: 50px;
+  padding: 10px 30px;
+  position: relative;
+  left: 25px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+input:checked+label .template-name {
+  background: #eaae72;
+  color: black;
+  font-weight: 700;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  transition: 0.3s;
+}
+
+.tab-content {
+  position: absolute;
+  left: 25px;
+  top: 49px;
+  opacity: 0;
+  z-index: 0;
+  transition: 0.5s;
+}
+
+input:checked+label .tab-content {
+  opacity: 1;
+}
+
+/* -----------------Template-Container--------------------- */
+
+.template-container {
+  /* background-color: #ffd95c; */
+  background-image: linear-gradient(123deg, #eaae72 50%, #e080a4 90%);
+  width: 670px;
+  height: 820px;
+  border-radius: 0px 5px 5px 5px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 60px 70px rgba(74, 57, 74, 0.684);
+}
+
+/* Cover Page Template */
+.template {
+  background: white;
+  color: black;
+  padding: 30px;
+  width: 600px;
+  height: 750px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  font-family: "Times New Roman";
+  text-align: center;
+}
+
+.template .border {
+  margin: -10px;
+  padding: 15px;
+  height: 44.4em;
+  border: 4px solid black;
+  border-radius: 2px;
+}
+
+/* University Logo */
+.template img {
+  width: 160px;
+  margin: 10px 0 0 0;
+}
+
+/* Titles */
+.lab-name {
+  color: #337ab7;
+  font-size: 1.6em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 10px 0;
+}
+
+/* University & Department */
+.university {
+  color: #ac8471;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.location {
+  color: #337ab7;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 5px 0 5px 0;
+}
+
+.department {
+  color: #5cb85c;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* Submission Details */
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0px 0 0px;
+}
+
+.submitted-to,
+.submitted-by {
+  border: 2px solid gray;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: lightblue;
+  width: 45%;
+  height: 175px;
+  text-align: left;
+}
+
+h4 {
+  font-size: 0.9em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.submitted-to h4,
+.submitted-by h4 {
+  font-size: 1em;
+  font-weight: bold;
+  color: #d9534f;
+}
+
+.submitted-to h5,
+.submitted-by h5 {
+  font-size: 12px;
+  margin: 5px 0;
+  color: black;
+}
+
+/* --------------template-2-------------------- */
+#template-2 {
+  .university {
+    color: #ac8471;
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+
+  .location {
+    color: #337ab7;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 5px 0 5px 0;
+  }
+
+  .department {
+    color: #5cb85c;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .lab-name {
+    color: #337ab7;
+    font-size: 1.6em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+
+  /* University Logo */
+  .template img {
+    width: 160px;
+    margin: 10px 0 0 0;
+  }
+
+  .submitted-by {
+    border: none;
+    padding: 5px 20px;
+    background-color: transparent;
+    width: 75%;
+    text-align: left;
+  }
+
+  .submitted-by h4 {
+    font-size: 24px;
+  }
+
+  .submitted-by h5 {
+    font-size: 14px;
+  }
+}
+
+/* --------------template-3-------------------- */
+#template-3 {
+  .university {
+    color: #ac8471;
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+
+  .location {
+    color: #337ab7;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 5px 0 5px 0;
+  }
+
+  .department {
+    color: #5cb85c;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .lab-name {
+    color: #337ab7;
+    font-size: 1.6em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+
+  /* University Logo */
+  .template img {
+    width: 160px;
+    margin: 10px 0 0 0;
+  }
+
+  .submitted-to,
+  .submitted-by {
+    background-color: rgba(173, 216, 230, 0);
+    border: none;
+  }
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  top: 380px;
+  color: white;
+  text-align: right;
+  padding: 10px;
+  font-size: 0.9rem;
+  margin-top: -350px;
+  margin-right: 20px;
+}
+
+.footer h1 {
+  font-size: 3.6em;
+  letter-spacing: 5px;
+}
+
+.footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.footer i {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 2px;
+  margin-top: 10px;
+  font-size: 30px;
+  text-decoration: none;
+}
+
+/* -------------------Responsiveness--------------------- */
+
+@media (max-width: 1280px) {
+  body {
+    height: auto;
+    padding: 20px;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(45deg, #5249c8, #bd48f8, #d9534f);
+    z-index: -1;
+  }
+
+  .container {
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+  }
+
+  .editor {
+    width: 80%;
+    padding: 15px;
+  }
+
+  .template-container {
+    transform: scale(1);
+    transform-origin: top center;
+  }
+
+  button {
+    width: 50%;
+    height: 60%;
+    font-size: 0.9rem;
+    background: #ed8dad;
+  }
+
+  .footer {
+    position: relative !important;
+    right: 0 !important;
+    top: 0 !important;
+    margin-top: 80px !important;
+    margin-right: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+    border-top: 2px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 5px;
+  }
+
+  .footer-icons a {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    height: auto;
+    padding: 20px;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .navbar h2 {
+    font-size: 3em;
+    font-weight: 800;
+    text-align: center;
+    padding: 40px;
+    color: #fff;
+  }
+
+  .container {
+    flex-direction: column;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .editor {
+    width: 80%;
+    padding: 15px;
+  }
+
+  .template-container {
+    transform: scale(1);
+    transform-origin: top center;
+  }
+
+  button {
+    width: 50%;
+    height: 60%;
+    font-size: 0.9rem;
+    background: #ed8db0;
+  }
+
+  .footer {
+    position: relative !important;
+    right: 0 !important;
+    top: 0 !important;
+    margin-top: 80px !important;
+    margin-right: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+    border-top: 2px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
+  }
+
+  .footer-icons a {
+    font-size: 26px;
+  }
+}
