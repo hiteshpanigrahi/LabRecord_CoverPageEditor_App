@@ -21,9 +21,11 @@
   0% {
     background-position: 0% 100%;
   }
+
   50% {
     background-position: 100% 0%;
   }
+
   100% {
     background-position: 0% 100%;
   }
@@ -364,7 +366,7 @@ select option {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   display: flex;
@@ -375,9 +377,10 @@ select option {
 }
 
 .modal-content {
-  background: rgba(255, 255, 255, 0.12); /* Slightly more opaque glass */
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
+  background: rgba(255, 255, 255, 0.1);
+  /* Slightly more opaque glass */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 35px 30px;
   border-radius: 20px;
@@ -402,7 +405,7 @@ select option {
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  z-index: 10; 
+  z-index: 10;
   margin-bottom: -2px;
 }
 
@@ -431,7 +434,7 @@ select option {
   background: linear-gradient(135deg, #eaae72 0%, #e080a4 100%);
   width: 670px;
   height: 820px;
-  border-radius: 10px;
+  border-radius: 0 8px 8px 8px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -633,8 +636,10 @@ select option {
 /* ------ Tablets & small laptops (stacked layout) ------ */
 @media (max-width: 1280px) {
   .app-wrapper {
-    zoom: 1; /* Reset zoom on smaller screens */
+    zoom: 1;
+    /* Reset zoom on smaller screens */
   }
+
   .container {
     flex-direction: column;
     flex-wrap: wrap;
@@ -666,7 +671,7 @@ select option {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 50px 20px;
+    padding: 30px 20px;
     border-top: 2px solid rgba(255, 255, 255, 0.15);
   }
 
