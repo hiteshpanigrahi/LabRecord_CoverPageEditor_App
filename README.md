@@ -1,16 +1,21 @@
-# React + Vite
+# **OUTR Lab Record Cover Generator** 🎉
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This tool simplifies the process of creating professional lab record covers for Students of **Odisha University of Technology and Research (OUTR), Bhubaneswar**.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
+## 🚀 **How to Use:**
+1. Fill in your details (School, Department, Lab Name, Teacher's Name, etc.).
+2. Toggle additional sections (Group/Sub-Group) if needed.
+3. Select from multiple professional templates.
+4. Click the **Download** button to get your high-quality PDF!
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ **Built by:**
+- **Developer**: Hitesh Panigrahi
+- **Branch**: E&I, OUTR
+- **LinkedIn**: [Connect with me!](https://www.linkedin.com/in/hitesh-panigrahi-2244312b7/)
+- **GitHub**: [Hitesh Panigrahi](https://github.com/hiteshpanigrahi)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Happy Designing!** 🎉
