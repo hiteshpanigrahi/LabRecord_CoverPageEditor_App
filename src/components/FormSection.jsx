@@ -133,7 +133,7 @@ const FormSection = ({ formData, toggles, handleInputChange, handleToggle, onCle
         <div className="form-group" style={{ marginTop: '15px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '10px' }}>
           <div className="label-row">
             <label htmlFor="tearLine" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-              <FaCut style={{ transform: 'rotate(-45deg)' }} /> Tear Line
+              <FaCut style={{ transform: 'rotate(-45deg)' }} /> Tear Line 
             </label>
             <label className="switch">
               <input type="checkbox" id="tearLine" checked={toggles.tearLine} onChange={() => handleToggle('tearLine')} />

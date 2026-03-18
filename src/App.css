@@ -4,7 +4,7 @@
 .app-wrapper {
   min-height: 100vh;
   position: relative;
-  zoom: 0.8;
+  zoom: 0.75;
 }
 
 .bg-container {
@@ -580,16 +580,21 @@ select option {
    TEAR LINE (TRIM LINE)
    ========================================== */
 .tear-line-container {
+  display: none; /* Hide in web preview by default */
   position: absolute;
   left: 0;
   right: 0;
   bottom: 5px; 
   height: 30px;
-  display: flex;
   align-items: center;
   pointer-events: none;
   z-index: 5;
   padding: 0;
+}
+
+/* Only show in physical download */
+.template-wrapper.is-printing .tear-line-container {
+  display: flex;
 }
 
 .tear-line {
@@ -599,7 +604,6 @@ select option {
 }
 
 .scissor-icon {
-  /* display: none; Hide in web preview */
   position: absolute;
   left: 20px;
   top: 85%;
@@ -607,11 +611,6 @@ select option {
   width: 20px;
   height: auto;
   z-index: 6;
-}
-
-/* Only show scissor in the exported file */
-.template-wrapper.is-printing .scissor-icon {
-  display: block;
 }
 
 .template-border {

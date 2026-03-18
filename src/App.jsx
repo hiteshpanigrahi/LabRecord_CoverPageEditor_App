@@ -23,9 +23,14 @@ function App() {
   });
   const [toggles, setToggles] = useState(() => {
     const saved = localStorage.getItem('labToggles');
-    return saved ? JSON.parse(saved) : {
-      secActive: true, groupActive: true, subGroupActive: true, tearLine: true
-    };
+    const defaults = { secActive: true, groupActive: true, subGroupActive: true, tearLine: true };
+    if (!saved) return defaults;
+    try {
+      const parsed = JSON.parse(saved);
+      return { ...defaults, ...parsed };
+    } catch (e) {
+      return defaults;
+    }
   });
   const [activeTab, setActiveTab] = useState(() => {
     return localStorage.getItem('labActiveTab') || 'tab-1';
