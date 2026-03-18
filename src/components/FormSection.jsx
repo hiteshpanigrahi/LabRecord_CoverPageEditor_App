@@ -140,6 +140,9 @@ const FormSection = ({ formData, toggles, handleInputChange, handleToggle, onCle
               <span className="slider"></span>
             </label>
           </div>
+          <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', marginTop: '4px', marginLeft: '20px', fontStyle: 'italic' }}>
+            Adds a tear line in the downloaded PDF.
+          </p>
         </div>
       </motion.div>
 
