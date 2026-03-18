@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaTrashAlt, FaDownload, FaCoffee } from 'react-icons/fa';
+import { FaTrashAlt, FaDownload, FaCoffee, FaCut } from 'react-icons/fa';
 import ComboBox from './ComboBox';
 
 const FormSection = ({ formData, toggles, handleInputChange, handleToggle, onClear, onDownload, onSupport }) => {
@@ -119,7 +119,6 @@ const FormSection = ({ formData, toggles, handleInputChange, handleToggle, onCle
           </div>
           <input className="glass-input" type="text" id="group" value={formData.group} onChange={handleInputChange} disabled={!toggles.groupActive} placeholder="Enter Group" />
         </div>
-        
         <div className="form-group">
           <div className="label-row">
             <label htmlFor="subGroup">Sub-Group:</label>
@@ -129,6 +128,18 @@ const FormSection = ({ formData, toggles, handleInputChange, handleToggle, onCle
             </label>
           </div>
           <input className="glass-input" type="text" id="subGroup" value={formData.subGroup} onChange={handleInputChange} disabled={!toggles.subGroupActive} placeholder="Enter Sub-Group" />
+        </div>
+
+        <div className="form-group" style={{ marginTop: '15px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '10px' }}>
+          <div className="label-row">
+            <label htmlFor="tearLine" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+              <FaCut style={{ transform: 'rotate(-45deg)' }} /> Tear Line
+            </label>
+            <label className="switch">
+              <input type="checkbox" id="tearLine" checked={toggles.tearLine} onChange={() => handleToggle('tearLine')} />
+              <span className="slider"></span>
+            </label>
+          </div>
         </div>
       </motion.div>
 

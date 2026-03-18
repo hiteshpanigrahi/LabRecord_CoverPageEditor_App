@@ -24,7 +24,7 @@ function App() {
   const [toggles, setToggles] = useState(() => {
     const saved = localStorage.getItem('labToggles');
     return saved ? JSON.parse(saved) : {
-      secActive: true, groupActive: true, subGroupActive: true
+      secActive: true, groupActive: true, subGroupActive: true, tearLine: true
     };
   });
   const [activeTab, setActiveTab] = useState(() => {
@@ -78,6 +78,7 @@ function App() {
     if (key === 'groupActive' && toggles.groupActive) setFormData(p => ({ ...p, group: '' }));
     if (key === 'subGroupActive' && toggles.subGroupActive) setFormData(p => ({ ...p, subGroup: '' }));
     if (key === 'secActive' && toggles.secActive) setFormData(p => ({ ...p, section: '' }));
+    // Note: tearLine doesn't clear any formData
   };
 
   const resetForm = () => {
@@ -85,7 +86,7 @@ function App() {
       name: '', reg: '', school: '', branch: '', section: '', semester: '',
       lab: '', teacher1: '', teacher2: '', group: '', subGroup: ''
     });
-    setToggles({ secActive: true, groupActive: true, subGroupActive: true });
+    setToggles({ secActive: true, groupActive: true, subGroupActive: true, tearLine: true });
     setModals(p => ({ ...p, confirm: false }));
     localStorage.removeItem('labFormData');
     localStorage.removeItem('labToggles');
@@ -101,8 +102,9 @@ function App() {
     clone.style.top = '0';
     clone.style.transform = 'none';
     clone.style.width = '600px';
-    clone.style.height = '750px';
+    clone.style.height = '780px';
     clone.style.zIndex = '-1';
+    clone.classList.add('is-printing');
     document.body.appendChild(clone);
 
     // Wait one frame for the browser to layout the clone

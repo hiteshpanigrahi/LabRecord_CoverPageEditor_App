@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import outrLogo from '../assets/images/outr_logo.png';
+import scissorsImg from '../assets/images/scissors.png';
 
 const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateRef }) => {
   const tabs = ['tab-1', 'tab-2', 'tab-3'];
@@ -122,6 +123,13 @@ const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateR
 
                 {getTemplateLayout()}
               </div>
+              
+              {toggles.tearLine && (
+                <div className="tear-line-container">
+                  <div className="tear-line"></div>
+                  <img src={scissorsImg} alt="scissors" className="scissor-icon print-only" />
+                </div>
+              )}
             </motion.div>
           </AnimatePresence>
         </div>
