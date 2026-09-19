@@ -130,9 +130,9 @@ const FormSection = ({ formData, toggles, handleInputChange, handleToggle, onCle
           <input className="glass-input" type="text" id="subGroup" value={formData.subGroup} onChange={handleInputChange} disabled={!toggles.subGroupActive} placeholder="Enter Sub-Group" />
         </div>
 
-        <div className="form-group" style={{ marginTop: '15px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '10px' }}>
+        <div className="form-group form-divider">
           <div className="label-row">
-            <label htmlFor="tearLine" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+            <label htmlFor="tearLine" className="tear-line-label">
               <FaCut style={{ transform: 'rotate(-45deg)' }} /> Tear Line 
             </label>
             <label className="switch">
@@ -140,7 +140,7 @@ const FormSection = ({ formData, toggles, handleInputChange, handleToggle, onCle
               <span className="slider"></span>
             </label>
           </div>
-          <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', marginTop: '4px', marginLeft: '20px', fontStyle: 'italic' }}>
+          <p className="form-note" style={{ fontStyle: 'italic' }}>
             Adds a tear line in the downloaded PDF.
           </p>
         </div>

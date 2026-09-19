@@ -5,30 +5,17 @@
   min-height: 100vh;
   position: relative;
   zoom: 0.75;
+  display: flex;
+  flex-direction: column;
 }
 
 .bg-container {
-  background: linear-gradient(45deg, #5249c8, #bd48f8, #d9534f, #bd48f8, #5249c8);
-  background-size: 400% 400%;
-  animation: gradientFlow 30s ease-in-out infinite;
+  background: var(--canvas);
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-}
-
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 100%;
-  }
-
-  50% {
-    background-position: 100% 0%;
-  }
-
-  100% {
-    background-position: 0% 100%;
-  }
+  transition: background-color .25s ease;
 }
 
 .container {
@@ -41,10 +28,11 @@
   box-sizing: border-box;
   position: relative;
   z-index: 1;
+  flex: 1;
 }
 
 /* ==========================================
-   NAVBAR
+   NAVBAR — Mobbin nav-pill token
    ========================================== */
 nav {
   display: flex;
@@ -58,33 +46,64 @@ nav {
 .navbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
-  padding: 0 20px;
+  gap: 12px;
+  padding: 16px 24px;
   width: 100%;
 }
 
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .navbar h2 {
-  font-size: 3em;
-  letter-spacing: 4px;
-  padding: 40px;
-  padding-bottom: 10px;
-  color: #fff;
-  font-weight: 800;
+  font-size: 1.7rem;
+  letter-spacing: 0;
+  color: var(--ink);
+  font-weight: 652;
   text-align: left;
 }
 
 .rating-badge {
   display: flex;
   align-items: center;
-  font-size: 0.9rem;
-  margin-left: 10px;
+  font-size: 0.85rem;
   padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  font-family: "Cascadia Code", monospace;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: var(--canvas-soft);
+  color: var(--ink);
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-weight: 456;
   white-space: nowrap;
+}
+
+/* Theme toggle — stadium pill, matches nav-pill chrome */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--canvas-soft);
+  color: var(--ink);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color .2s ease, transform .2s ease;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--hairline);
+}
+
+.theme-toggle:active {
+  transform: scale(0.94);
 }
 
 /* ==========================================
@@ -97,43 +116,36 @@ nav {
   padding: 30px;
   width: 100%;
   max-width: 680px;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   box-sizing: border-box;
 }
 
 .editor h2 {
   margin-bottom: 10px;
   font-size: 1.1rem;
-  letter-spacing: 1px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 4px;
-  color: #fff;
+  letter-spacing: 0;
+  font-weight: 652;
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 8px;
+  color: var(--ink);
 }
 
 .formSection {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   padding: 22px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   margin-bottom: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  transition: transform 0.4s ease, z-index 0.3s;
+  transition: border-color .2s ease;
   position: relative;
   z-index: 1;
 }
 
 .formSection:focus-within {
   z-index: 100;
+  border-color: var(--hairline);
 }
 
 .formSection:first-child {
   grid-column: span 2;
-}
-
-.formSection:hover {
-  transform: translateY(-2px);
 }
 
 .editor-buttons {
@@ -147,36 +159,30 @@ label {
   display: block;
   margin-top: 6px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  color: var(--ink);
 }
 
 input,
 select {
   width: 100%;
-  padding: 8px;
+  padding: 10px 12px;
   margin: 5px 0 12px 0;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   border: none;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
   outline: none;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: inherit;
+  font-weight: 456;
   box-sizing: border-box;
 }
 
 input::selection {
-  background: rgba(185, 102, 241, 0.6);
-  color: white;
-}
-
-input::placeholder {
-  font-family: "Cascadia Code", monospace;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
+  background: var(--accent);
+  color: var(--on-primary);
 }
 
 select option {
-  color: black;
+  color: var(--ink);
 }
 
 .label-row {
@@ -185,8 +191,29 @@ select option {
   align-items: center;
 }
 
+.form-divider {
+  margin-top: 15px;
+  border-top: 1px solid var(--hairline);
+  padding-top: 10px;
+}
+
+.form-note {
+  font-size: 11px;
+  color: var(--text-faint);
+  margin-top: 4px;
+  margin-left: 20px;
+  font-weight: 456;
+}
+
+.tear-line-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
 /* ==========================================
-   COMBOBOX
+   COMBOBOX — Mobbin field + dropdown chrome
    ========================================== */
 .combobox-wrapper {
   position: relative;
@@ -201,49 +228,46 @@ select option {
   z-index: 1000;
   max-height: 200px;
   overflow-y: auto;
-  background: rgba(40, 30, 60, 0.85);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--radius-sm);
   padding: 6px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 .combobox-option {
   padding: 8px 12px;
   cursor: pointer;
-  border-radius: 6px;
-  color: white;
-  font-family: "Nunito Sans", sans-serif;
-  transition: 0.2s;
+  border-radius: 12px;
+  color: var(--ink);
+  font-family: inherit;
+  font-weight: 456;
+  transition: background-color .15s ease;
 }
 
 .combobox-option:hover {
-  background: rgba(185, 102, 241, 0.4);
+  background: var(--canvas-soft);
 }
 
 .combobox-noresult {
   padding: 8px 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-muted);
   font-style: italic;
   font-size: 0.9rem;
 }
 
 /* ==========================================
-   BUTTONS
+   BUTTONS — Mobbin stadium-pill CTAs
    ========================================== */
 .btn {
   border: none;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 10px;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
   cursor: pointer;
   font-weight: 600;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  transition: 0.25s ease;
-  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0;
+  transition: opacity .2s ease, background-color .2s ease;
+  font-family: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -251,39 +275,39 @@ select option {
   white-space: nowrap;
 }
 
+/* button-primary */
 .btn-primary {
-  background: #b966f1;
-  box-shadow: 0 4px 15px rgba(185, 102, 241, 0.3);
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
+.btn-primary:hover {
+  opacity: 0.85;
+}
+
+/* button-outline */
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  color: white;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
 }
 
-.btn-primary:hover,
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  background: var(--canvas-soft);
 }
 
+/* button-pill-soft */
 .btn-support {
-  background: #ffd166;
-  color: #1a1a1a;
-  box-shadow: 0 4px 15px rgba(255, 209, 102, 0.4);
-  font-family: 'Cookie', cursive;
-  font-size: 1.3rem;
-  letter-spacing: 0.5px;
-  padding: 6px 20px;
+  background: var(--canvas-soft);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 1rem;
+  letter-spacing: 0;
+  padding: 10px 20px;
 }
 
 .btn-support:hover {
-  background: #ffe08a;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 209, 102, 0.5);
+  background: var(--hairline);
 }
 
 .editor-buttons {
@@ -306,11 +330,11 @@ select option {
   transform-origin: top center;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 /* ==========================================
-   TOGGLE SWITCH
+   TOGGLE SWITCH — monochrome, ink = "on"
    ========================================== */
 .switch {
   position: relative;
@@ -334,8 +358,8 @@ select option {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
+  background-color: var(--hairline);
+  border-radius: var(--radius-full);
   transition: .3s;
 }
 
@@ -346,28 +370,27 @@ select option {
   width: 14px;
   left: 2px;
   bottom: 2px;
-  background-color: white;
+  background-color: var(--canvas);
   border-radius: 50%;
   transition: .3s;
 }
 
 .switch input:checked+.slider {
-  background-color: #eaae72;
+  background-color: var(--ink);
 }
 
 .switch input:checked+.slider:before {
   transform: translateX(14px);
+  background-color: var(--on-primary);
 }
 
 /* ==========================================
-   MODALS
+   MODALS — shadow-free, hairline outline
    ========================================== */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  -webkit-backdrop-filter: blur(15px);
-  backdrop-filter: blur(15px);
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -376,21 +399,76 @@ select option {
 }
 
 .modal-content {
-  background: rgba(255, 255, 255, 0.15);
-  /* Slightly more opaque glass */
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--canvas);
+  border: 1px solid var(--hairline-soft);
   padding: 35px 30px;
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   max-width: 95vw;
   box-sizing: border-box;
+  color: var(--ink);
+}
+
+.modal-title {
+  color: var(--ink);
+  font-weight: 652;
+  margin-bottom: 10px;
+}
+
+.modal-text {
+  color: var(--text-muted);
+  font-weight: 456;
+}
+
+.modal-note {
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  color: var(--text-muted);
+}
+
+.upi-chip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--canvas-soft);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  margin-bottom: 20px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.upi-copied-tooltip {
+  position: absolute;
+  top: -35px;
+  background: var(--ink);
+  color: var(--on-primary);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+}
+
+.star-rating {
+  font-size: 3rem;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.star-filled {
+  color: var(--ink);
+}
+
+.star-empty {
+  color: var(--hairline);
 }
 
 /* ==========================================
-   TEMPLATE PREVIEW – TABS
+   TEMPLATE PREVIEW — TABS (chrome around the printable page)
    ========================================== */
 .tabs {
   display: flex;
@@ -402,44 +480,51 @@ select option {
 
 .tabs-header {
   display: flex;
-  justify-content: flex-start;
-  width: 100%;
+  justify-content: center;
+  width: fit-content;
   z-index: 10;
-  margin-bottom: -2px;
+  margin-bottom: 20px;
+  background: var(--canvas-soft);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  gap: 2px;
 }
 
 .tab-btn {
-  background: rgba(153, 132, 212, 0.4);
-  color: white;
+  background: transparent;
+  color: var(--text-muted);
   border: none;
-  padding: 12px 25px;
-  border-radius: 8px 8px 0 0;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
   cursor: pointer;
   font-weight: 600;
-  transition: 0.2s;
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 1rem;
+  transition: background-color .2s ease, color .2s ease;
+  font-family: inherit;
+  font-size: 0.95rem;
 }
 
 .tab-btn.active {
-  background: #eaae72;
-  color: #111;
-  transform: translateY(-2px);
+  background: var(--canvas);
+  color: var(--ink);
 }
 
-
-
 .template-container {
-  background: linear-gradient(135deg, #eaae72 0%, #e080a4 100%);
+  background: var(--canvas-soft);
   width: 670px;
   height: 820px;
-  border-radius: 0 8px 8px 8px;
+  border-radius: var(--radius-md);
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: none;
 }
 
+/* ------------------------------------------------------------------
+   Everything below this line renders the actual downloadable cover
+   page (captured by html2canvas for the PDF). Left as designed —
+   it is document content, not app chrome, so it stays theme-fixed
+   (always the printed white-paper look) regardless of light/dark UI.
+   ------------------------------------------------------------------ */
 .template-wrapper {
   position: relative;
   background: white;
@@ -619,56 +704,64 @@ select option {
 }
 
 /* ==========================================
-   FOOTER
+   FOOTER — Mobbin footer token: inverse (polarity-flipped) band
    ========================================== */
 .footer {
-  position: fixed !important;
-  bottom: 30px !important;
-  right: 40px !important;
-  color: white;
-  text-align: right;
-  padding: 10px;
-  font-size: 0.9rem;
-  z-index: 10;
+  position: relative !important;
+  width: 100%;
+  margin-top: var(--space-xxl);
+  background: var(--primary);
+  color: var(--on-primary);
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  z-index: 1;
+  box-sizing: border-box;
 }
 
 .footer h1 {
-  font-size: 3.6em;
-  letter-spacing: 5px;
+  font-size: 1.8rem;
+  letter-spacing: 0;
+  font-weight: 652;
+  margin-bottom: 6px;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  color: var(--on-primary);
+  opacity: 0.6;
 }
 
 .footer h2 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 652;
   margin-top: 5px;
 }
 
 .footer h3 {
-  font-size: 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 456;
   margin-top: 2px;
+  opacity: 0.7;
 }
 
 .footer-icons {
   display: flex;
-  justify-content: flex-end;
-  gap: 15px;
-  margin-top: 10px;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 14px;
 }
 
 .footer-icons a {
-  color: white;
-  font-size: 30px;
+  color: var(--on-primary);
+  font-size: 1.5rem;
+  transition: opacity .2s ease;
   text-decoration: none;
-}
-
-.footer-icons a {
-  color: white;
-  font-size: 1.8rem;
-  transition: transform 0.2s;
-  text-decoration: none;
+  opacity: 0.85;
 }
 
 .footer-icons a:hover {
-  color: #ffd16b;
+  opacity: 1;
 }
 
 /* ==========================================
@@ -694,34 +787,17 @@ select option {
     max-width: 100%;
   }
 
-  .btn-support {
-    font-weight: 500;
-  }
-
   .template-scale-wrapper {
     transform: scale(0.85);
     margin-bottom: calc(-865px * 0.15);
   }
 
   .footer {
-    position: relative !important;
-    right: 0 !important;
-    top: 0 !important;
-    margin-top: 30px !important;
-    margin-right: 0 !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 30px 20px;
-    border-top: 2px solid rgba(255, 255, 255, 0.15);
+    padding: var(--space-xl) var(--space-md);
   }
 
   .footer-icons {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 5px;
+    gap: 26px;
   }
 }
 
@@ -729,19 +805,11 @@ select option {
 @media (max-width: 800px) {
   .navbar {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .navbar h2 {
-    font-size: 2em;
-    padding: 20px 0px;
-    margin-top: 20px;
-    text-align: left;
-  }
-
-  .rating-badge {
-    margin-left: 0;
-    margin-top: 8px;
+    font-size: 1.4rem;
   }
 
   .container {
@@ -785,8 +853,7 @@ select option {
 /* ------ Mobile ------ */
 @media (max-width: 520px) {
   .navbar h2 {
-    font-size: 1.5em;
-    padding: 15px 10px;
+    font-size: 1.2rem;
   }
 
   .container {
@@ -808,19 +875,16 @@ select option {
   }
 
   .tabs-header {
-    justify-content: left;
-    margin-bottom: -2px;
+    margin-bottom: 14px;
   }
 
   .tab-btn {
-    padding: 10px 18px;
-    font-size: 1rem;
-    border-radius: 8px 8px 0 0;
+    padding: 8px 16px;
+    font-size: 0.85rem;
   }
 
   .footer h1 {
-    font-size: 1.8rem;
-    margin-bottom: 5px;
+    font-size: 1.4rem;
   }
 
   .footer p {
@@ -828,11 +892,11 @@ select option {
   }
 
   .footer h2 {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .footer h3 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -844,6 +908,6 @@ select option {
   }
 
   .navbar h2 {
-    font-size: 1.3em;
+    font-size: 1.1rem;
   }
 }

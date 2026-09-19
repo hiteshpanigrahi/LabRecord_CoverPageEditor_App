@@ -50,18 +50,16 @@ const RatingModal = ({ isOpen, onClose, onSupport }) => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 50, opacity: 0 }}
           >
-            <h3 style={{ color: 'white', marginBottom: '10px' }}>⭐ Rate this tool</h3>
-            <p style={{ color: '#d1d5db', opacity: 0.9 }}>If this tool helped you, please rate</p>
+            <h3 className="modal-title">⭐ Rate this tool</h3>
+            <p className="modal-text">If this tool helped you, please rate</p>
             
-            <div style={{ fontSize: '3rem', margin: '20px 0', display: 'flex', justifyContent: 'center', gap: '5px' }}>
+            <div className="star-rating">
               {[1, 2, 3, 4, 5].map((star) => (
                 <motion.span 
                   key={star}
                   whileHover={!hasRated ? { scale: 1.2 } : {}}
-                  style={{ 
-                    cursor: hasRated ? 'default' : 'pointer', 
-                    color: star <= rating ? '#ffd966' : 'rgba(255,255,255,0.2)' 
-                  }}
+                  className={star <= rating ? 'star-filled' : 'star-empty'}
+                  style={{ cursor: hasRated ? 'default' : 'pointer' }}
                   onClick={() => handleRate(star)}
                 >
                   ★
@@ -76,7 +74,7 @@ const RatingModal = ({ isOpen, onClose, onSupport }) => {
                   animate={{ opacity: 1, height: 'auto' }}
                   transition={{ duration: 0.4 }}
                 >
-                  <p className="support-msg" style={{ fontSize: '0.9rem', marginBottom: '15px', color: '#d1d5db' }}>
+                  <p className="support-msg modal-note">
                     This tool is free to use. If it saved you time, consider supporting the project with a small donation.
                   </p>
                   <button className="btn btn-support" onClick={onSupport} style={{ margin: '0 auto 15px auto', width: '100%', border: 'none' }}>

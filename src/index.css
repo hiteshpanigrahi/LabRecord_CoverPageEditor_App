@@ -1,7 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Cookie&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
-@import url('https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css');
-@import url('https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css');
-@import url('https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap');
+
+/* ==========================================
+   DESIGN TOKENS — Mobbin-inspired monochrome system
+   Light mode is the default; [data-theme="dark"] overrides.
+   ========================================== */
+:root {
+  --ink: #141414;
+  --ink-soft: #262626;
+  --text-muted: #707070;
+  --text-faint: #adadad;
+  --canvas: #ffffff;
+  --canvas-soft: #f3f3f3;
+  --field: #f0f0f0;
+  --hairline-soft: #f0f0f0;
+  --hairline: #e0e0e0;
+  --accent: #0066ff;
+
+  /* primary/on-primary carry the "polarity" of the strongest-contrast pill —
+     they intentionally flip in dark mode so ink-filled CTAs stay ink-filled */
+  --primary: #141414;
+  --on-primary: #ffffff;
+
+  --radius-sm: 16px;
+  --radius-md: 24px;
+  --radius-full: 9999px;
+
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --ink: #f2f2f2;
+  --ink-soft: #dcdcdc;
+  --text-muted: #9a9a9a;
+  --text-faint: #6b6b6b;
+  --canvas: #121212;
+  --canvas-soft: #1c1c1c;
+  --field: #202020;
+  --hairline-soft: #232323;
+  --hairline: #333333;
+  --accent: #4c8dff;
+
+  --primary: #f2f2f2;
+  --on-primary: #141414;
+
+  color-scheme: dark;
+}
 
 * {
   margin: 0;
@@ -10,60 +61,69 @@
 }
 
 body {
-  background: linear-gradient(45deg, #5249c8 30%, #bd48f8, #d9534f);
-  background-size: cover;
-  background-attachment: fixed;
-  color: white;
+  background: var(--canvas);
+  color: var(--ink);
   min-height: 100vh;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
+  transition: background-color .25s ease, color .25s ease;
 }
 
-/* Glassmorphism Classes */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-}
-
+/* ==========================================
+   Text inputs — Mobbin text-input token:
+   field-tint fill, no resting border, 2px ink focus ring
+   ========================================== */
 .glass-input {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  transition: all 0.3s ease;
+  background: var(--field);
+  border: 1px solid transparent;
+  color: var(--ink);
+  transition: background-color .2s ease, box-shadow .2s ease;
 }
+
 .glass-input:focus {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: var(--field);
+  border-color: transparent;
   outline: none;
-  box-shadow: 0 0 10px rgba(185, 102, 241, 0.3);
+  box-shadow: 0 0 0 2px var(--ink);
 }
+
 .glass-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-  font-family: "Cascadia Code", monospace;
+  color: var(--text-faint);
+  font-family: inherit;
   font-size: 13px;
 }
 
-select.glass-input option {
-  color: #1a1a1a;
-  background: #fff;
+.glass-input:disabled {
+  opacity: .55;
+  cursor: not-allowed;
 }
 
+select.glass-input option {
+  color: var(--ink);
+  background: var(--canvas);
+}
 
+/* ==========================================
+   Card panel — Mobbin elevation level 2:
+   canvas fill + hairline-soft outline, no shadow
+   ========================================== */
+.glass-panel {
+  background: var(--canvas);
+  border: 1px solid var(--hairline-soft);
+  box-shadow: none;
+}
 
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--canvas-soft);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--hairline);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--text-faint);
 }

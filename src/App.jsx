@@ -39,8 +39,20 @@ function App() {
     confirm: false, rating: false, support: false
   });
   const [ratingStats, setRatingStats] = useState({ average: 0, count: 0 });
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('labTheme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
 
   const templateRef = useRef(null);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('labTheme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
 
   useEffect(() => {
     // Generate/Restore UserID
@@ -147,7 +159,7 @@ function App() {
     <div className="app-wrapper">
       <div className="bg-container">
       </div>
-      <Navbar ratingStats={ratingStats} />
+      <Navbar ratingStats={ratingStats} theme={theme} onToggleTheme={toggleTheme} />
 
       <motion.div
         className="container"

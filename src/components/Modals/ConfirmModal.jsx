@@ -18,7 +18,7 @@ const ConfirmModal = ({ isOpen, onConfirm, onClose }) => {
             exit={{ scale: 0.8, opacity: 0, y: 30 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
           >
-            <p style={{ fontSize: '1.2rem', marginBottom: '20px', color: 'white' }}>Clear all fields?</p>
+            <p className="modal-title" style={{ fontSize: '1.2rem', marginBottom: '20px' }}>Clear all fields?</p>
             <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
               <button 
                 className="btn btn-primary" 

@@ -29,10 +29,10 @@ const SupportModal = ({ isOpen, onClose }) => {
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ type: "spring", stiffness: 250, damping: 20 }}
           >
-            <h3 style={{ color: 'white', marginBottom: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-              <FaCoffee color="#ffd166"/> Support this project
+            <h3 className="modal-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+              <FaCoffee color="currentColor"/> Support this project
             </h3>
-            <p style={{ color: '#d1d5db', marginBottom: '20px' }}>
+            <p className="modal-text" style={{ marginBottom: '20px' }}>
               If this tool helped you, consider buying me a coffee.
             </p>
 
@@ -43,16 +43,7 @@ const SupportModal = ({ isOpen, onClose }) => {
               style={{ width: '180px', borderRadius: '12px', marginBottom: '20px' }} 
             />
 
-            <div 
-              style={{ 
-                position: 'relative',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
-                padding: '12px 20px', background: 'rgba(255,255,255,0.1)', 
-                borderRadius: '8px', cursor: 'pointer', marginBottom: '20px',
-                color: 'white', fontWeight: 'bold'
-              }}
-              onClick={handleCopy}
-            >
+            <div className="upi-chip" onClick={handleCopy}>
               <span>{upiId}</span>
               <FaCopy />
               
@@ -62,10 +53,7 @@ const SupportModal = ({ isOpen, onClose }) => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    style={{
-                      position: 'absolute', top: '-35px', background: 'rgba(50,50,50,0.9)',
-                      padding: '4px 10px', borderRadius: '6px', fontSize: '12px', color: 'white'
-                    }}
+                    className="upi-copied-tooltip"
                   >
                     Copied!
                   </motion.div>
