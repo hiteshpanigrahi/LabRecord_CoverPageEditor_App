@@ -17,8 +17,8 @@ function App() {
   const MotionDiv = motion.div;
   const prefersReducedMotion = useReducedMotion();
   const [currentView, setCurrentView] = useState(() => {
-    const savedView = localStorage.getItem('outrCurrentView');
-    return savedView === 'workspace' || savedView === 'support' ? savedView : 'landing';
+    // Force workspace view for debugging
+    return 'workspace';
   });
   const [supportReturnView, setSupportReturnView] = useState('landing');
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
@@ -29,7 +29,7 @@ function App() {
     const saved = localStorage.getItem('labFormData');
     return saved ? JSON.parse(saved) : {
       name: '', reg: '', school: '', branch: '', section: '', semester: '',
-      lab: '', teacher1: '', teacher2: '', group: '', subGroup: ''
+      lab: '', assignmentTopic: '', teacher1: '', teacher2: '', group: '', subGroup: ''
     };
   });
   const [toggles, setToggles] = useState(() => {

@@ -10,6 +10,7 @@ const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateR
   const suppressClick = useRef(false);
   const [slideDirection, setSlideDirection] = useState(1);
   const tabs = ['tab-1', 'tab-2', 'tab-3'];
+  const documentType = (formData.assignmentTopic && formData.assignmentTopic.length > 0) ? 'ASSIGNMENT' : 'LAB RECORD';
   const selectTemplate = (nextTab) => {
     const currentIndex = tabs.indexOf(activeTab);
     const nextIndex = tabs.indexOf(nextTab);
@@ -116,7 +117,7 @@ const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateR
           <AnimatePresence mode="wait">
             <MotionDiv
               key={activeTab}
-              className="template-wrapper" 
+              className="template-wrapper"
               ref={templateRef}
               initial={{ opacity: 0, x: slideDirection * 88, scale: .96 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -160,16 +161,17 @@ const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateR
                 <h3 className="department">
                   <span>{getDepartmentName(formData.school)}</span>
                 </h3>
-                
+
                 <img src={outrLogo} alt="University Logo" className="uni-logo" />
-                
+
                 <h2 className="lab-name">
-                  {formData.lab || ""} <br />LAB RECORD
+                  {documentType === 'ASSIGNMENT' ? formData.assignmentTopic : formData.lab} <br />
+                  {documentType}
                 </h2>
 
                 {getTemplateLayout()}
               </div>
-              
+
               {toggles.tearLine && (
                 <div className="tear-line-container">
                   <div className="tear-line"></div>

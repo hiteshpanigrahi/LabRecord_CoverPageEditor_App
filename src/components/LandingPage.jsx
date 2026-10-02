@@ -42,21 +42,21 @@ const faqs = [
 const testimonials = [
   {
     quoteTitle: 'Honestly faster than making Maggi.',
-    rating: 5,
+    rating: 5.0,
     author: 'Soumya R., 5th Sem',
     body: 'Typed my name and roll number once, and when I opened it next week for another lab, it was still there. Literally took 30 seconds outside the print shop.'
   },
   {
-    quoteTitle: 'Finally, no broken borders at the Xerox shop.',
-    rating: 5,
+    quoteTitle: 'Way better than asking a senior for their old template.',
+    rating: 5.0,
     author: 'Rohan P., 7th Sem',
-    body: 'MS Word always messes up the bottom margin on campus printers. This gave a clean, sharp PDF with zero alignment issues.'
+    body: 'Every time I tried to edit a lab record on my phone using Canva or Word, the text boxes would fly everywhere. This thing is instant. Total lifesaver.'
   },
   {
     quoteTitle: 'Too good to be free—actual lifesaver.',
-    rating: 4.9,
+    rating: 4.0,
     author: 'Pooja M., 3rd Sem',
-    body: 'I used to dread fixing tables and blurred logos before submissions. You just type, hit print, and you are sorted.'
+    body: 'I used to dread fixing fonts and blurred logos before submissions. You just type, hit print, and you are sorted.'
   }
 ];
 
