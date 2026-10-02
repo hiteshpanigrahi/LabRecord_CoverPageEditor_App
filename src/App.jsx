@@ -17,8 +17,8 @@ function App() {
   const MotionDiv = motion.div;
   const prefersReducedMotion = useReducedMotion();
   const [currentView, setCurrentView] = useState(() => {
-    // Force workspace view for debugging
-    return 'workspace';
+    const savedView = localStorage.getItem('outrCurrentView');
+    return savedView === 'workspace' || savedView === 'support' ? savedView : 'landing';
   });
   const [supportReturnView, setSupportReturnView] = useState('landing');
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
