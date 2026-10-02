@@ -49,12 +49,12 @@ const testimonials = [
   {
     quoteTitle: 'Way better than asking a senior for their old template.',
     rating: 5.0,
-    author: 'Rohan P., 7th Sem',
+    author: 'Rohan P., 2nd Sem',
     body: 'Every time I tried to edit a lab record on my phone using Canva or Word, the text boxes would fly everywhere. This thing is instant. Total lifesaver.'
   },
   {
     quoteTitle: 'Too good to be free—actual lifesaver.',
-    rating: 4.0,
+    rating: 5.0,
     author: 'Pooja M., 3rd Sem',
     body: 'I used to dread fixing fonts and blurred logos before submissions. You just type, hit print, and you are sorted.'
   }
