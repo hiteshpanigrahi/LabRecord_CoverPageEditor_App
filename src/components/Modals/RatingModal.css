@@ -1,0 +1,300 @@
+/* ==========================================================================
+   RATING MODAL - MODERN, MINIMAL & RESPONSIVE
+   ========================================================================== */
+.rating-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: rating-overlay-in .16s ease-out both;
+}
+
+.rating-modal-overlay.theme-dark {
+  background: rgba(5, 7, 14, 0.78);
+}
+
+.rating-modal-overlay.theme-light {
+  background: rgba(15, 23, 42, 0.42);
+}
+
+/* Card */
+.rating-modal-card {
+  max-width: 440px;
+  width: 100%;
+  border-radius: 22px;
+  padding: 32px 26px 26px 26px;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+  animation: rating-card-in .2s cubic-bezier(.22, 1, .36, 1) both;
+  transition: transform .16s ease, box-shadow .16s ease;
+  overflow: hidden;
+}
+
+.rating-modal-overlay.theme-dark .rating-modal-card {
+  background: rgba(18, 16, 30, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 35px rgba(245, 158, 11, 0.14);
+  color: #ffffff;
+}
+
+.rating-modal-overlay.theme-light .rating-modal-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+  color: #0f172a;
+}
+
+/* Close Button */
+.rating-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.rating-modal-overlay.theme-dark .rating-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+}
+
+.rating-modal-overlay.theme-dark .rating-close-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.rating-modal-overlay.theme-light .rating-close-btn {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+.rating-modal-overlay.theme-light .rating-close-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Icon Box */
+.rating-icon-box {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  margin: 0 auto 14px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rating-modal-overlay.theme-dark .rating-icon-box {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+}
+
+.rating-modal-overlay.theme-light .rating-icon-box {
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  color: #d97706;
+}
+
+.icon-star-glyph {
+  fill: currentColor;
+}
+
+/* Header */
+.rating-title {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  line-height: 1.25;
+}
+
+.rating-modal-overlay.theme-dark .rating-title {
+  color: #ffffff;
+}
+
+.rating-modal-overlay.theme-light .rating-title {
+  color: #0f172a;
+}
+
+.rating-subtitle {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+}
+
+.rating-modal-overlay.theme-dark .rating-subtitle {
+  color: #94a3b8;
+}
+
+.rating-modal-overlay.theme-light .rating-subtitle {
+  color: #64748b;
+}
+
+/* Stars Container */
+.rating-stars-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+/* Post-Rating Support Prompt */
+.rating-support-prompt {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+}
+
+.rating-support-text {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  margin: 0 0 10px 0;
+}
+
+.rating-modal-overlay.theme-dark .rating-support-text {
+  color: #fde68a;
+}
+
+.rating-modal-overlay.theme-light .rating-support-text {
+  color: #92400e;
+}
+
+.rating-btn-coffee {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: #f59e0b;
+  color: #0f172a;
+  border: none;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rating-btn-coffee:hover {
+  background: #d97706;
+  color: #ffffff;
+}
+
+/* Actions */
+.rating-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.rating-btn-secondary,
+.rating-btn-primary {
+  flex: 1;
+  padding: 9px 16px;
+  border-radius: 9999px;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+/* Secondary Button */
+.rating-modal-overlay.theme-dark .rating-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #cbd5e1;
+}
+
+.rating-modal-overlay.theme-dark .rating-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.rating-modal-overlay.theme-light .rating-btn-secondary {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+.rating-modal-overlay.theme-light .rating-btn-secondary:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Primary Button */
+.rating-modal-overlay.theme-dark .rating-btn-primary {
+  background: #4f46e5;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+.rating-modal-overlay.theme-dark .rating-btn-primary:hover {
+  background: #4338ca;
+}
+
+.rating-modal-overlay.theme-light .rating-btn-primary {
+  background: #0f172a;
+  border: 1px solid #0f172a;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+}
+
+.rating-modal-overlay.theme-light .rating-btn-primary:hover {
+  background: #1e293b;
+}
+
+@media (max-width: 480px) {
+  .rating-modal-card {
+    padding: 24px 18px 20px 18px;
+    border-radius: 20px;
+  }
+
+  @keyframes rating-overlay-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes rating-card-in {
+    from { opacity: 0; transform: translateY(8px) scale(.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rating-modal-overlay,
+    .rating-modal-card { animation: none; }
+  }
+  .rating-title {
+    font-size: 1.2rem;
+  }
+  .rating-subtitle {
+    font-size: 0.78rem;
+    margin-bottom: 16px;
+  }
+  .rating-stars-wrapper {
+    margin-bottom: 18px;
+  }
+}

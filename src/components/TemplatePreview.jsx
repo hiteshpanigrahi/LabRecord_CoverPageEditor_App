@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Expand } from 'lucide-react';
 import outrLogo from '../assets/images/outr_logo.png';
 import scissorsImg from '../assets/images/scissors.png';
 
-const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateRef }) => {
+const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateRef, onZoom, onDocumentClick }) => {
+  const MotionDiv = motion.div;
+  const touchStartX = useRef(null);
+  const suppressClick = useRef(false);
+  const [slideDirection, setSlideDirection] = useState(1);
   const tabs = ['tab-1', 'tab-2', 'tab-3'];
-
+  const selectTemplate = (nextTab) => {
+    const currentIndex = tabs.indexOf(activeTab);
+    const nextIndex = tabs.indexOf(nextTab);
+    if (currentIndex !== nextIndex) {
+      setSlideDirection(nextIndex > currentIndex ? 1 : -1);
+      setActiveTab(nextTab);
+    }
+  };
   // Helper to get formatted department
   const getDepartmentName = (school) => {
     let result = "School of";
@@ -83,28 +95,62 @@ const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateR
 
   return (
     <div className="tabs">
+      <div className="tabs-header" role="tablist" aria-label="Cover template">
+        {tabs.map((tab, idx) => (
+          <button
+            key={tab}
+            className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+            onClick={() => selectTemplate(tab)}
+            role="tab"
+            aria-selected={activeTab === tab}
+            aria-label={`Select Template ${idx + 1}`}
+          >
+            <span className="template-tab-radio" aria-hidden="true" />
+            <span>Cover {idx + 1}</span>
+          </button>
+        ))}
+      </div>
       <div className="template-scale-wrapper">
-        <div className="tabs-header">
-          {tabs.map((tab, idx) => (
-            <button 
-              key={tab} 
-              className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-              onClick={() => setActiveTab(tab)}
-            >
-              Template {idx + 1}
-            </button>
-          ))}
-        </div>
-        <div className="template-container">
+        <div className="template-container" onClick={onDocumentClick}>
+          {onZoom && <button type="button" className="preview-zoom-hint" onClick={onZoom} aria-label="Open full-screen preview"><Expand size={16} /></button>}
           <AnimatePresence mode="wait">
-            <motion.div 
+            <MotionDiv
               key={activeTab}
               className="template-wrapper" 
               ref={templateRef}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, x: slideDirection * 88, scale: .96 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: slideDirection * -88, scale: .96 }}
+              transition={{ type: 'spring', stiffness: 280, damping: 18, mass: .68 }}
+              onClick={() => {
+                if (suppressClick.current) {
+                  suppressClick.current = false;
+                  return;
+                }
+                onZoom?.();
+              }}
+              onTouchStart={event => { touchStartX.current = event.touches[0]?.clientX ?? null; }}
+              onTouchEnd={event => {
+                if (touchStartX.current === null) return;
+                const delta = event.changedTouches[0].clientX - touchStartX.current;
+                touchStartX.current = null;
+                if (Math.abs(delta) < 55) return;
+                const currentIndex = tabs.indexOf(activeTab);
+                const nextIndex = (currentIndex + (delta < 0 ? 1 : tabs.length - 1)) % tabs.length;
+                setSlideDirection(delta < 0 ? 1 : -1);
+                setActiveTab(tabs[nextIndex]);
+                suppressClick.current = true;
+                window.setTimeout(() => { suppressClick.current = false; }, 450);
+              }}
+              onKeyDown={event => {
+                if (onZoom && (event.key === 'Enter' || event.key === ' ')) {
+                  event.preventDefault();
+                  onZoom();
+                }
+              }}
+              role={onZoom ? 'button' : undefined}
+              tabIndex={onZoom ? 0 : undefined}
+              aria-label={onZoom ? 'Open full-screen preview' : undefined}
             >
               <div className="template-border">
                 <h3 className="university">
@@ -112,7 +158,7 @@ const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateR
                 </h3>
                 <h3 className="location">BHUBANESWAR</h3>
                 <h3 className="department">
-                  {getDepartmentName(formData.school)}
+                  <span>{getDepartmentName(formData.school)}</span>
                 </h3>
                 
                 <img src={outrLogo} alt="University Logo" className="uni-logo" />
@@ -130,7 +176,7 @@ const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateR
                   <img src={scissorsImg} alt="scissors" className="scissor-icon print-only" />
                 </div>
               )}
-            </motion.div>
+            </MotionDiv>
           </AnimatePresence>
         </div>
       </div>

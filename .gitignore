@@ -12,6 +12,21 @@ dist
 dist-ssr
 *.local
 
+# AI/session tooling and legacy reference material
+.agent/
+old_version/
+.copilot/
+.cursor/
+.claude/
+
+# Local browser/debug artifacts
+*_dump.html
+*_console.log
+test_*.mjs
+test_*.png
+real_test.png
+build_log*.txt
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

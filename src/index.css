@@ -1,12 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Cookie&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 @import url('https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css');
 @import url('https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css');
 @import url('https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400..1000&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -15,7 +20,7 @@ body {
   background-attachment: fixed;
   color: white;
   min-height: 100vh;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "JetBrains Mono", monospace;
   overflow-x: hidden;
 }
 
@@ -42,7 +47,7 @@ body {
 }
 .glass-input::placeholder {
   color: rgba(255, 255, 255, 0.5);
-  font-family: "Cascadia Code", monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 13px;
 }
 

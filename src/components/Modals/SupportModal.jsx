@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCopy, FaCoffee } from 'react-icons/fa';
+import { Coffee, Copy, Check, X } from 'lucide-react';
 import qrCode from '../../assets/images/GooglePay_QR.png';
+import './SupportModal.css';
 
-const SupportModal = ({ isOpen, onClose }) => {
+const SupportModal = ({ isOpen, onClose, theme = 'dark' }) => {
   const [copied, setCopied] = useState(false);
   const upiId = "hitesh.edu9@okaxis";
 
@@ -16,66 +17,89 @@ const SupportModal = ({ isOpen, onClose }) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div 
-          className="modal-overlay"
+        <motion.div
+          className={`support-overlay theme-${theme}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) onClose();
+          }}
         >
-          <motion.div 
-            className="modal-content"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 250, damping: 20 }}
+          <motion.div
+            className="support-modal-card"
+            initial={{ scale: 0.94, opacity: 0, y: 12 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.94, opacity: 0, y: 12 }}
+            transition={{ type: "spring", stiffness: 320, damping: 26 }}
           >
-            <h3 style={{ color: 'white', marginBottom: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-              <FaCoffee color="#ffd166"/> Support this project
-            </h3>
-            <p style={{ color: '#d1d5db', marginBottom: '20px' }}>
-              If this tool helped you, consider buying me a coffee.
-            </p>
-
-            {/* In a real project you'd place GooglePay_QR.png in public/ */}
-            <img 
-              src={qrCode} 
-              alt="UPI QR Code" 
-              style={{ width: '180px', borderRadius: '12px', marginBottom: '20px' }} 
-            />
-
-            <div 
-              style={{ 
-                position: 'relative',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
-                padding: '12px 20px', background: 'rgba(255,255,255,0.1)', 
-                borderRadius: '8px', cursor: 'pointer', marginBottom: '20px',
-                color: 'white', fontWeight: 'bold'
-              }}
-              onClick={handleCopy}
+            {/* Top Close Button */}
+            <button
+              className="support-close-btn"
+              onClick={onClose}
+              aria-label="Close dialog"
             >
-              <span>{upiId}</span>
-              <FaCopy />
-              
-              <AnimatePresence>
-                {copied && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    style={{
-                      position: 'absolute', top: '-35px', background: 'rgba(50,50,50,0.9)',
-                      padding: '4px 10px', borderRadius: '6px', fontSize: '12px', color: 'white'
-                    }}
-                  >
-                    Copied!
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <button className="btn btn-secondary" onClick={onClose} style={{ width: '100%' }}>
-              Close
+              <X size={17} />
             </button>
+
+            {/* Content Container */}
+            <div className="support-grid">
+              {/* Left Details Column (Desktop) / Top Details (Mobile) */}
+              <div className="support-left">
+                <div className="support-tag-pill">
+                  <Coffee size={13} />
+                  <span>Buy Me a Coffee</span>
+                </div>
+
+                <h3 className="support-heading">Support the Project</h3>
+
+              </div>
+
+              {/* Right QR & UPI Column */}
+              <div className="support-right">
+                <div className="support-qr-box">
+                  <img
+                    src={qrCode}
+                    alt="UPI QR Code - Hitesh Panigrahi"
+                    className="support-qr-img"
+                  />
+                </div>
+
+                <button
+                  className="support-upi-pill"
+                  onClick={handleCopy}
+                  title="Click to copy UPI ID"
+                  aria-label="Copy UPI ID"
+                >
+                  <span className="upi-id-text">{upiId}</span>
+                  {copied ? (
+                    <span className="upi-copied-indicator">
+                      <Check size={14} />
+                      <span className="copied-label">Copied</span>
+                    </span>
+                  ) : (
+                    <Copy size={14} className="upi-copy-icon" />
+                  )}
+
+                  <AnimatePresence>
+                    {copied && (
+                      <motion.div
+                        className="support-copied-toast"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                      >
+                        ✓ Copied to clipboard!
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </button>
+
+                <span className="support-apps-note">
+                  Scan with GPay, PhonePe, Paytm, or any UPI app
+                </span>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       )}
