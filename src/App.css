@@ -587,11 +587,11 @@ select option {
    TEAR LINE (TRIM LINE)
    ========================================== */
 .tear-line-container {
-  display: none; /* Hide in web preview by default */
+  display: none;
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 5px; 
+  bottom: 75px;
   height: 30px;
   align-items: center;
   pointer-events: none;
