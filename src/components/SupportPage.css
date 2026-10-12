@@ -44,25 +44,24 @@
 }
 
 .support-page.theme-dark {
-  background-color: #100d27;
-  background-image: linear-gradient(135deg,#070811 0%,#120d27 28%,#0d1830 54%,#261a2f 78%,#070811 100%);
-  background-size: 400% 400%;
-  animation: landingDarkGradient 22s ease-in-out infinite alternate;
+  background-color: #060511;
+  background-image: radial-gradient(circle at 50% 0%, #150d32 0%, #0c0822 35%, #060511 75%);
 }
 
 .support-page.theme-dark::before {
-  opacity: .86;
+  position: fixed;
+  inset: -15%;
+  opacity: .85;
   background:
-    radial-gradient(ellipse at 14% 18%, rgba(255,255,255,.22) 0%, transparent 30%),
-    radial-gradient(ellipse at 78% 20%, rgba(247,190,239,.38) 0%, transparent 38%),
-    radial-gradient(ellipse at 26% 62%, rgba(189,225,255,.32) 0%, transparent 43%),
-    radial-gradient(ellipse at 84% 80%, rgba(182,52,64,.24) 0%, transparent 37%),
-    radial-gradient(ellipse at 48% 42%, rgba(5,5,15,.94) 0%, transparent 58%),
-    repeating-radial-gradient(circle at 38% 46%, rgba(255,255,255,.035) 0 1px, transparent 1px 4px);
-  background-size: 135% 135%,145% 145%,155% 155%,145% 145%,125% 125%,7px 7px;
-  background-position: 0% 0%,100% 0%,0% 100%,100% 100%,50% 50%,0 0;
-  background-blend-mode: screen,screen,screen,screen,multiply,soft-light;
-  animation: landingDarkMeshDrift 24s ease-in-out infinite alternate;
+    radial-gradient(ellipse at 18% 22%, rgba(139, 92, 246, .34) 0%, transparent 45%),
+    radial-gradient(ellipse at 82% 22%, rgba(217, 70, 239, .28) 0%, transparent 42%),
+    radial-gradient(ellipse at 22% 76%, rgba(59, 130, 246, .26) 0%, transparent 46%),
+    radial-gradient(ellipse at 82% 80%, rgba(244, 63, 94, .18) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(6, 5, 17, .82) 0%, transparent 65%);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  pointer-events: none;
+  animation: landingDarkMeshDrift 28s ease-in-out infinite alternate;
 }
 
 .support-page-header {

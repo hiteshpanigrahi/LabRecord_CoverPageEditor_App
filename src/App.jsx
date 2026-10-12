@@ -91,6 +91,10 @@ function App() {
   };
 
   useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
     // Generate/Restore UserID
     let uid = localStorage.getItem('userID');
     if (!uid) {
@@ -253,7 +257,6 @@ function App() {
     <div className={`app-wrapper theme-${theme}${currentView === 'landing' ? ' landing-shell' : ''}${currentView === 'support' ? ' support-shell' : ''}`}>
       <AnimatePresence
         mode="wait"
-        initial={false}
         onExitComplete={() => window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' })}
       >
       {currentView === 'landing' ? (

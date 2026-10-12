@@ -15,6 +15,8 @@ const MotionDiv = motion.div;
 const MotionArticle = motion.article;
 const MotionDetails = motion.details;
 const MotionFooter = motion.footer;
+const MotionH2 = motion.h2;
+const MotionP = motion.p;
 
 const faqs = [
   {
@@ -72,6 +74,14 @@ const itemReveal = {
   hidden: { opacity: 0, y: 16 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.48, ease: [0.22, 1, 0.36, 1] } }
 };
+const headingReveal = {
+  hidden: { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.58, ease: [0.22, 1, 0.36, 1] } }
+};
+const headingSubReveal = {
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.52, delay: 0.08, ease: [0.22, 1, 0.36, 1] } }
+};
 
 const heroSlides = [
   {
@@ -121,12 +131,23 @@ const LandingPage = ({ ratingStats, theme, onToggleTheme, onLaunch, onSupport })
     }, 6500);
     return () => window.clearInterval(intervalId);
   }, [prefersReducedMotion]);
-  const sectionMotion = prefersReducedMotion
-    ? { initial: false }
-    : { variants: sectionReveal, initial: 'hidden', whileInView: 'visible', viewport: { once: true, amount: 0.16 } };
-  const introMotion = prefersReducedMotion
-    ? { initial: false, animate: { opacity: 1, y: 0 } }
-    : { initial: { opacity: 0, y: 14 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } };
+  const sectionRevealDynamic = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: prefersReducedMotion ? 0.2 : 0.62, ease: [0.22, 1, 0.36, 1] } }
+  };
+
+  const sectionMotion = {
+    variants: sectionRevealDynamic,
+    initial: 'hidden',
+    whileInView: 'visible',
+    viewport: { once: false, amount: 0.14 }
+  };
+
+  const introMotion = {
+    initial: { opacity: 0, y: prefersReducedMotion ? 0 : 14 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: prefersReducedMotion ? 0.2 : 0.55, ease: [0.22, 1, 0.36, 1] }
+  };
   const swipeToSlide = (startX, endX, length, setSlide) => {
     if (startX === null || Math.abs(endX - startX) < 40) return;
     setSlide(current => (current + (endX < startX ? 1 : length - 1)) % length);
@@ -214,10 +235,10 @@ const LandingPage = ({ ratingStats, theme, onToggleTheme, onLaunch, onSupport })
       </MotionSection>
 
       <MotionSection className="landing-section landing-how" id="how-to-use" {...sectionMotion}>
-        <div className="landing-section-heading">
-          <h2>How to use it.</h2>
-          <p>Three steps from blank form to ready-to-print PDF.</p>
-        </div>
+        <MotionDiv className="landing-section-heading" variants={staggerReveal}>
+          <MotionH2 variants={headingReveal}>How to use it.</MotionH2>
+          <MotionP variants={headingSubReveal}>Three steps from blank form to ready-to-print PDF.</MotionP>
+        </MotionDiv>
         <MotionOl className="landing-steps" variants={staggerReveal}>
           <MotionLi variants={itemReveal}><span className="landing-step-number">01</span><div><h3>Fill in your details</h3><p>Add your name, registration number, branch, semester, and lab details.</p></div><ArrowDown className="landing-step-down" size={18} /></MotionLi>
           <MotionLi variants={itemReveal}><span className="landing-step-number">02</span><div><h3>Choose your cover</h3><p>Pick a layout and see the document preview update.</p></div><ArrowDown className="landing-step-down" size={18} /></MotionLi>
@@ -226,10 +247,10 @@ const LandingPage = ({ ratingStats, theme, onToggleTheme, onLaunch, onSupport })
       </MotionSection>
 
       <MotionSection className="landing-section landing-benefits" id="why-outr" {...sectionMotion}>
-        <div className="landing-section-heading">
-          <h2>Why OUTR Coverpage Editor?</h2>
-          <p>Everything you need for a clean academic cover, without the formatting hassle.</p>
-        </div>
+        <MotionDiv className="landing-section-heading" variants={staggerReveal}>
+          <MotionH2 variants={headingReveal}>Why OUTR Coverpage Editor?</MotionH2>
+          <MotionP variants={headingSubReveal}>Everything you need for a clean academic cover, without the formatting hassle.</MotionP>
+        </MotionDiv>
         <MotionDiv className="landing-benefit-grid" variants={staggerReveal}>
           <MotionArticle className="landing-benefit-card" variants={itemReveal}><span><Printer size={19} /></span><small>01 / FORMAT</small><h3>A4, from the start</h3><p>Designed around an A4 document and exported as an A4 PDF.</p></MotionArticle>
           <MotionArticle className="landing-benefit-card" variants={itemReveal}><span><Zap size={19} /></span><small>02 / PREVIEW</small><h3>See changes as you type</h3><p>Your cover preview updates while you fill in the form.</p></MotionArticle>
@@ -239,10 +260,10 @@ const LandingPage = ({ ratingStats, theme, onToggleTheme, onLaunch, onSupport })
       </MotionSection>
 
       <MotionSection className="landing-section landing-feedback" id="feedback" {...sectionMotion}>
-        <div className="landing-section-heading">
-          <h2>What students are saying.</h2>
-          <p>Real feedback from students using the editor to create their academic covers.</p>
-        </div>
+        <MotionDiv className="landing-section-heading" variants={staggerReveal}>
+          <MotionH2 variants={headingReveal}>What students are saying.</MotionH2>
+          <MotionP variants={headingSubReveal}>Real feedback from students using the editor to create their academic covers.</MotionP>
+        </MotionDiv>
         <div className="landing-feedback-summary">
           <div>
             <strong>{average > 0 ? average.toFixed(1) : '4.8'}</strong>
@@ -333,10 +354,10 @@ const LandingPage = ({ ratingStats, theme, onToggleTheme, onLaunch, onSupport })
       </MotionSection>
 
       <MotionSection className="landing-section landing-faq" id="faq" {...sectionMotion}>
-        <div className="landing-section-heading">
-          <h2>Frequently asked questions.</h2>
-          <p>Details about templates, saved form data, and PDF generation.</p>
-        </div>
+        <MotionDiv className="landing-section-heading" variants={staggerReveal}>
+          <MotionH2 variants={headingReveal}>Frequently asked questions.</MotionH2>
+          <MotionP variants={headingSubReveal}>Details about templates, saved form data, and PDF generation.</MotionP>
+        </MotionDiv>
         <MotionDiv className="landing-faq-list" variants={staggerReveal}>
           {faqs.map(faq => (
             <MotionDetails className="landing-faq-item" key={faq.question} variants={itemReveal}>
@@ -348,8 +369,8 @@ const LandingPage = ({ ratingStats, theme, onToggleTheme, onLaunch, onSupport })
       </MotionSection>
 
       <MotionSection className="landing-final-cta" {...sectionMotion}>
-        <h2>Ready to create your cover?</h2>
-        <p>Fill in your details, check the preview, and export your PDF.</p>
+        <MotionH2 variants={headingReveal}>Ready to create your cover?</MotionH2>
+        <MotionP variants={headingSubReveal}>Fill in your details, check the preview, and export your PDF.</MotionP>
         <LaunchButton onClick={onLaunch} />
       </MotionSection>
 
