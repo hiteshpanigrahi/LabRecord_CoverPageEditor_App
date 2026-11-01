@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Expand } from 'lucide-react';
 import outrLogo from '../assets/images/outr_logo.png';
@@ -8,7 +8,47 @@ const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateR
   const MotionDiv = motion.div;
   const touchStartX = useRef(null);
   const suppressClick = useRef(false);
+  const scaleContainerRef = useRef(null);
+  const [previewScale, setPreviewScale] = useState(null);
   const [slideDirection, setSlideDirection] = useState(1);
+
+  useEffect(() => {
+    if (!onZoom) return; // Keep modal's dedicated zoom styling
+
+    const updateScale = () => {
+      if (!scaleContainerRef.current) return;
+      const isDesktop = window.innerWidth >= 1200;
+      if (!isDesktop) {
+        setPreviewScale(null);
+        return;
+      }
+      const parent = scaleContainerRef.current;
+      const availWidth = parent.clientWidth;
+      const availHeight = parent.clientHeight;
+      const baseWidth = 670;
+      const baseHeight = 820;
+
+      if (availHeight > 40 && availWidth > 40) {
+        const scaleH = (availHeight - 16) / baseHeight;
+        const scaleW = (availWidth - 16) / baseWidth;
+        const calculatedScale = Math.min(scaleH, scaleW);
+        const finalScale = Math.max(0.35, Math.min(calculatedScale, 1.0));
+        setPreviewScale(Number(finalScale.toFixed(3)));
+      }
+    };
+
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    if (scaleContainerRef.current) {
+      observer.observe(scaleContainerRef.current);
+    }
+    window.addEventListener('resize', updateScale);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', updateScale);
+    };
+  }, [onZoom]);
+
   const tabs = ['tab-1', 'tab-2', 'tab-3'];
   const documentType = (formData.assignmentTopic && formData.assignmentTopic.length > 0) ? 'ASSIGNMENT' : 'LAB RECORD';
   const selectTemplate = (nextTab) => {
@@ -111,75 +151,80 @@ const TemplatePreview = ({ formData, toggles, activeTab, setActiveTab, templateR
           </button>
         ))}
       </div>
-      <div className="template-scale-wrapper">
-        <div className="template-container" onClick={onDocumentClick}>
-          {onZoom && <button type="button" className="preview-zoom-hint" onClick={onZoom} aria-label="Open full-screen preview"><Expand size={16} /></button>}
-          <AnimatePresence mode="wait">
-            <MotionDiv
-              key={activeTab}
-              className="template-wrapper"
-              ref={templateRef}
-              initial={{ opacity: 0, x: slideDirection * 88, scale: .96 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: slideDirection * -88, scale: .96 }}
-              transition={{ type: 'spring', stiffness: 280, damping: 18, mass: .68 }}
-              onClick={() => {
-                if (suppressClick.current) {
-                  suppressClick.current = false;
-                  return;
-                }
-                onZoom?.();
-              }}
-              onTouchStart={event => { touchStartX.current = event.touches[0]?.clientX ?? null; }}
-              onTouchEnd={event => {
-                if (touchStartX.current === null) return;
-                const delta = event.changedTouches[0].clientX - touchStartX.current;
-                touchStartX.current = null;
-                if (Math.abs(delta) < 55) return;
-                const currentIndex = tabs.indexOf(activeTab);
-                const nextIndex = (currentIndex + (delta < 0 ? 1 : tabs.length - 1)) % tabs.length;
-                setSlideDirection(delta < 0 ? 1 : -1);
-                setActiveTab(tabs[nextIndex]);
-                suppressClick.current = true;
-                window.setTimeout(() => { suppressClick.current = false; }, 450);
-              }}
-              onKeyDown={event => {
-                if (onZoom && (event.key === 'Enter' || event.key === ' ')) {
-                  event.preventDefault();
-                  onZoom();
-                }
-              }}
-              role={onZoom ? 'button' : undefined}
-              tabIndex={onZoom ? 0 : undefined}
-              aria-label={onZoom ? 'Open full-screen preview' : undefined}
-            >
-              <div className="template-border">
-                <h3 className="university">
-                  ODISHA UNIVERSITY OF <br />TECHNOLOGY AND RESEARCH
-                </h3>
-                <h3 className="location">BHUBANESWAR</h3>
-                <h3 className="department">
-                  <span>{getDepartmentName(formData.school)}</span>
-                </h3>
+      <div className="preview-viewport-container" ref={scaleContainerRef}>
+        <div
+          className="template-scale-wrapper"
+          style={previewScale ? { zoom: previewScale, transform: 'none', margin: '0 auto' } : undefined}
+        >
+          <div className="template-container" onClick={onDocumentClick}>
+            {onZoom && <button type="button" className="preview-zoom-hint" onClick={onZoom} aria-label="Open full-screen preview"><Expand size={16} /></button>}
+            <AnimatePresence mode="wait">
+              <MotionDiv
+                key={activeTab}
+                className="template-wrapper"
+                ref={templateRef}
+                initial={{ opacity: 0, x: slideDirection * 88, scale: .96 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: slideDirection * -88, scale: .96 }}
+                transition={{ type: 'spring', stiffness: 280, damping: 18, mass: .68 }}
+                onClick={() => {
+                  if (suppressClick.current) {
+                    suppressClick.current = false;
+                    return;
+                  }
+                  onZoom?.();
+                }}
+                onTouchStart={event => { touchStartX.current = event.touches[0]?.clientX ?? null; }}
+                onTouchEnd={event => {
+                  if (touchStartX.current === null) return;
+                  const delta = event.changedTouches[0].clientX - touchStartX.current;
+                  touchStartX.current = null;
+                  if (Math.abs(delta) < 55) return;
+                  const currentIndex = tabs.indexOf(activeTab);
+                  const nextIndex = (currentIndex + (delta < 0 ? 1 : tabs.length - 1)) % tabs.length;
+                  setSlideDirection(delta < 0 ? 1 : -1);
+                  setActiveTab(tabs[nextIndex]);
+                  suppressClick.current = true;
+                  window.setTimeout(() => { suppressClick.current = false; }, 450);
+                }}
+                onKeyDown={event => {
+                  if (onZoom && (event.key === 'Enter' || event.key === ' ')) {
+                    event.preventDefault();
+                    onZoom();
+                  }
+                }}
+                role={onZoom ? 'button' : undefined}
+                tabIndex={onZoom ? 0 : undefined}
+                aria-label={onZoom ? 'Open full-screen preview' : undefined}
+              >
+                <div className="template-border">
+                  <h3 className="university">
+                    ODISHA UNIVERSITY OF <br />TECHNOLOGY AND RESEARCH
+                  </h3>
+                  <h3 className="location">BHUBANESWAR</h3>
+                  <h3 className="department">
+                    <span>{getDepartmentName(formData.school)}</span>
+                  </h3>
 
-                <img src={outrLogo} alt="University Logo" className="uni-logo" />
+                  <img src={outrLogo} alt="University Logo" className="uni-logo" />
 
-                <h2 className="lab-name">
-                  {documentType === 'ASSIGNMENT' ? formData.assignmentTopic : formData.lab} <br />
-                  {documentType}
-                </h2>
+                  <h2 className="lab-name">
+                    {documentType === 'ASSIGNMENT' ? formData.assignmentTopic : formData.lab} <br />
+                    {documentType}
+                  </h2>
 
-                {getTemplateLayout()}
-              </div>
-
-              {toggles.tearLine && (
-                <div className="tear-line-container">
-                  <div className="tear-line"></div>
-                  <img src={scissorsImg} alt="scissors" className="scissor-icon print-only" />
+                  {getTemplateLayout()}
                 </div>
-              )}
-            </MotionDiv>
-          </AnimatePresence>
+
+                {toggles.tearLine && (
+                  <div className="tear-line-container">
+                    <div className="tear-line"></div>
+                    <img src={scissorsImg} alt="scissors" className="scissor-icon print-only" />
+                  </div>
+                )}
+              </MotionDiv>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </div>

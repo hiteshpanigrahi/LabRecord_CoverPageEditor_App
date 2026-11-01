@@ -27,6 +27,8 @@
 .rating-modal-card {
   max-width: 440px;
   width: 100%;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
   border-radius: 22px;
   padding: 32px 26px 26px 26px;
   text-align: center;
@@ -35,7 +37,6 @@
   font-family: "Nunito Sans", sans-serif;
   animation: rating-card-in .2s cubic-bezier(.22, 1, .36, 1) both;
   transition: transform .16s ease, box-shadow .16s ease;
-  overflow: hidden;
 }
 
 .rating-modal-overlay.theme-dark .rating-modal-card {
@@ -267,26 +268,27 @@
   background: #1e293b;
 }
 
+@keyframes rating-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rating-card-in {
+  from { opacity: 0; transform: translateY(8px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rating-modal-overlay,
+  .rating-modal-card { animation: none; }
+}
+
 @media (max-width: 480px) {
   .rating-modal-card {
     padding: 24px 18px 20px 18px;
     border-radius: 20px;
   }
 
-  @keyframes rating-overlay-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes rating-card-in {
-    from { opacity: 0; transform: translateY(8px) scale(.985); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .rating-modal-overlay,
-    .rating-modal-card { animation: none; }
-  }
   .rating-title {
     font-size: 1.2rem;
   }
@@ -298,3 +300,4 @@
     margin-bottom: 18px;
   }
 }
+

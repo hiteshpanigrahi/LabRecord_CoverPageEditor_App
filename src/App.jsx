@@ -178,7 +178,7 @@ function App() {
   const resetForm = () => {
     setFormData({
       name: '', reg: '', school: '', branch: '', section: '', semester: '',
-      lab: '', teacher1: '', teacher2: '', group: '', subGroup: ''
+      lab: '', assignmentTopic: '', teacher1: '', teacher2: '', group: '', subGroup: ''
     });
     setToggles({ secActive: true, groupActive: true, subGroupActive: true, tearLine: true });
     setModals(p => ({ ...p, confirm: false }));

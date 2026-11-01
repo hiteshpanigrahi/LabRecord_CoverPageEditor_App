@@ -158,32 +158,24 @@ const FormSection = ({
               <input className="glass-input" type="text" id="teacher2" value={formData.teacher2 || ''} onChange={handleInputChange} placeholder="Faculty name" />
             </div>
 
-            {/* HIDE Group and Sub-Group if it's an Assignment */}
-            {!isAssignment && (
-              <>
-                <div className="workspace-field">
-                  <FieldLabel id="group" label="Group" toggle={toggle('groupActive', 'Show Group')} />
-                  <input className="glass-input" type="text" id="group" value={formData.group || ''} onChange={handleInputChange} disabled={!toggles.groupActive} placeholder="Group" />
-                </div>
-                <div className="workspace-field">
-                  <FieldLabel id="subGroup" label="Sub-group" toggle={toggle('subGroupActive', 'Show Sub-group')} />
-                  <input className="glass-input" type="text" id="subGroup" value={formData.subGroup || ''} onChange={handleInputChange} disabled={!toggles.subGroupActive} placeholder="Sub-group" />
-                </div>
-              </>
-            )}
+            <div className="workspace-field">
+              <FieldLabel id="group" label="Group" toggle={toggle('groupActive', 'Show Group')} />
+              <input className="glass-input" type="text" id="group" value={formData.group || ''} onChange={handleInputChange} disabled={!toggles.groupActive} placeholder="Group" />
+            </div>
+            <div className="workspace-field">
+              <FieldLabel id="subGroup" label="Sub-group" toggle={toggle('subGroupActive', 'Show Sub-group')} />
+              <input className="glass-input" type="text" id="subGroup" value={formData.subGroup || ''} onChange={handleInputChange} disabled={!toggles.subGroupActive} placeholder="Sub-group" />
+            </div>
           </div>
 
-          {/* HIDE Tearline toggle if it's an Assignment */}
-          {!isAssignment && (
-            <div className="workspace-tearline-row">
-              <span className="workspace-tearline-icon"><Scissors size={16} /></span>
-              <span className="workspace-tearline-copy">
-                <b>Tear-off slip cut line</b>
-                <small>Include a cut line in the PDF output</small>
-              </span>
-              {toggle('tearLine', 'Include tear-off cut line')}
-            </div>
-          )}
+          <div className="workspace-tearline-row">
+            <span className="workspace-tearline-icon"><Scissors size={16} /></span>
+            <span className="workspace-tearline-copy">
+              <b>Tear-off slip cut line</b>
+              <small>Include a cut line in the PDF output</small>
+            </span>
+            {toggle('tearLine', 'Include tear-off cut line')}
+          </div>
 
         </div>}
       </section>

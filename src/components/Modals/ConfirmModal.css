@@ -27,6 +27,8 @@
 .confirm-modal-card {
   max-width: 400px;
   width: 100%;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
   border-radius: 20px;
   padding: 30px 24px 24px 24px;
   text-align: center;
@@ -234,25 +236,26 @@
   transform: translateY(1px);
 }
 
+@keyframes confirm-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes confirm-card-in {
+  from { opacity: 0; transform: translateY(8px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confirm-modal-overlay,
+  .confirm-modal-card { animation: none; }
+}
+
 @media (max-width: 480px) {
   .confirm-modal-card {
     padding: 24px 18px 20px 18px;
   }
 
-  @keyframes confirm-overlay-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes confirm-card-in {
-    from { opacity: 0; transform: translateY(8px) scale(.985); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .confirm-modal-overlay,
-    .confirm-modal-card { animation: none; }
-  }
   .confirm-title {
     font-size: 1.2rem;
   }
@@ -261,3 +264,4 @@
     margin-bottom: 20px;
   }
 }
+
